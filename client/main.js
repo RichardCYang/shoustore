@@ -4,7 +4,7 @@ function loadFavorItems(){
     let websock = new WebSocket("ws://localhost:8090");
     let i = 0;
 
-    websock.onmessage = (event) => {
+    websock.onmessage = function(event){
         if( i > 11 ){
             websock.close();
         }
@@ -16,7 +16,7 @@ function loadFavorItems(){
         }
     };
 
-    websock.onopen = (event) => {
+    websock.onopen = function(event){
         websock.send('reqfavitem');
     };
 }

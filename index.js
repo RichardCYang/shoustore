@@ -57,6 +57,9 @@ function loadResource( res,path ){
         if( path.endsWith('.svg') ){
             res.writeHead(200,{'Content-Type':'image/svg+xml'});
         }
+        if( path.endsWith('.css') ){
+            res.writeHead(200,{'Content-Type':'text/css'});
+        }
         rawData = fs.readFileSync(getRealmPath( path ) + path);
         res.end(rawData);
     }catch(err){
