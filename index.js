@@ -2,7 +2,7 @@
 const http = require('http');
 const fs = require('fs');
 const ws = require('ws');
-const dbmng = require('./dbmanager');
+const dbmng = require('./server/dbmanager');
 
 const hostname = '127.0.0.1';
 const port = 8090;
@@ -12,7 +12,7 @@ function loadResource( res,path ){
     try{
         let rawData;
         if( path == '/' ){
-            path = '/index.html';
+            path = '/client/index.html';
         }
         if( path.endsWith('.svg') ){
             res.writeHead(200,{'Content-Type':'image/svg+xml'});
@@ -46,10 +46,10 @@ webSocketServer.on('connection',(ws,req) => {
     console.log('접속');
     ws.on('message',(msg)=>{
         if( msg.toString() === 'reqfavitem' ){
-            let files = fs.readdirSync('./imgs');
+            let files = fs.readdirSync('./server/imgs');
             if( files ){
                 for( let i = 0; i < files.length; i++ ){
-                    let strbuff = fs.readFileSync('./imgs/' + files[i],'base64');
+                    let strbuff = fs.readFileSync('./server/imgs/' + files[i],'base64');
                     ws.send( strbuff );
                 }
             }
