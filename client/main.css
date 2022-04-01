@@ -128,6 +128,89 @@ footer {
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
 }
 
+#signinForm {
+    position: absolute;
+    width: 60%;
+    height: 60%; 
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    border: 16px solid rgb(255,208,103);
+}
+
+#signinForm > button {
+    position: relative;
+    width: 80%;
+    height: 30px;
+    top: calc(20%);
+    margin-top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgb(255,208,103);
+    border: none;
+    border-radius: 5px;
+    font-family: 'pto_reg';
+    color: #898989;
+    /* 로그인 버튼에 미묘한( subtile ) 외부 그림자 효과 적용 */
+    box-shadow:2px 2px 4px #d4d4d4;
+}
+
+#signinForm > button:hover {
+    background: rgb(255, 187, 39);
+}
+
+.popupBack {
+    position: fixed;
+    top: -64px;
+    height: calc(100vh + 64px);
+    width: 100vw;
+    background: rgba(41, 41, 41, 0.722);
+}
+
+.popupWindow {
+    position: relative;
+    width: 480px;
+    height: 640px;
+    background: rgb(255, 255, 255);
+    border-radius: 25px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    box-shadow: inset 8px 8px 5px #e5e5e5;
+}
+
+.popupWindow > embed{
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.inputField {
+    position: relative;
+    width: 80%;
+    height: 20px;
+    top: calc(12%);
+    margin-top: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: grid;
+}
+
+.inputField > label {
+    font-family: 'pto_reg';
+    font-size: 11pt;
+    color: #898989;
+}
+
+.inputField > input {
+    display: block;
+    border: 2px solid #cccccc;
+    border-radius: 4px;
+    height: 20px;
+    /* 입력칸에 미묘한( subtile ) 내부 그림자 효과 적용 */
+    box-shadow:inset 2px 2px 4px #d4d4d4;
+}
+
 .itemview {
     background: white;
     margin: 2px;

@@ -24,3 +24,17 @@ function loadFavorItems(){
 window.onload = function(){
     loadFavorItems();
 }
+
+function onSignIn_clicked(){
+    let popupBack = document.createElement('div');
+    let loginPopup = document.createElement('div');
+    let embedPage = document.createElement('embed');
+    popupBack.setAttribute('class','popupBack');
+    loginPopup.setAttribute('class','popupWindow');
+    
+    embedPage.src = './loginform.html';
+
+    loginPopup.appendChild( embedPage );
+    popupBack.appendChild( loginPopup );
+    document.body.appendChild( popupBack );
+}
