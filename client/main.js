@@ -1,4 +1,6 @@
 
+document.addStyleSheet('./main.css');
+
 function loadFavorItems(){
     let itemList = document.getElementsByClassName('itemview');
     let websock = new WebSocket("ws://localhost:8090");
@@ -26,15 +28,6 @@ window.onload = function(){
 }
 
 function onSignIn_clicked(){
-    let popupBack = document.createElement('div');
-    let loginPopup = document.createElement('div');
-    let embedPage = document.createElement('embed');
-    popupBack.setAttribute('class','popupBack');
-    loginPopup.setAttribute('class','popupWindow');
-    
-    embedPage.src = './loginform.html';
-
-    loginPopup.appendChild( embedPage );
-    popupBack.appendChild( loginPopup );
-    document.body.appendChild( popupBack );
+    let popup = new Popup;
+    popup.makePopup();
 }

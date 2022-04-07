@@ -1,0 +1,41 @@
+.popupBack {
+    position: fixed;
+    top: -64px;
+    height: calc(100vh + 64px);
+    width: 100vw;
+    background: rgba(41, 41, 41, 0.722);
+}
+
+.popupWindow {
+    position: relative;
+    width: 480px;
+    height: 640px;
+    background: rgb(255, 255, 255);
+    border-radius: 25px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    box-shadow: inset 8px 8px 5px #e5e5e5;
+}
+
+.popupWindow > embed{
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.popupClose {
+    position: absolute;
+    width: 48px;
+    height: 48px;
+    left: calc(100% - 48px - 12px);
+    top: calc(12px);
+    background-image: url(./icons/closeicon.svg);
+    background-size: cover;
+    background-color: transparent;
+    border: none;
+}
+
+.popupClose:hover {
+    background-image: url(./icons/closeicon_active.svg);
+}
