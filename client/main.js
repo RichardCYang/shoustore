@@ -2,9 +2,9 @@
 document.addStyleSheet('./main.css');
 
 function loadFavorItems(){
-    let itemList = document.getElementsByClassName('itemview');
-    let websock = new WebSocket("ws://localhost:8090");
-    let i = 0;
+    var itemList = document.getElementsByClassName('itemview');
+    var websock = new WebSocket("ws://localhost:8090");
+    var i = 0;
 
     websock.onmessage = function(event){
         if( i > 11 ){
@@ -24,10 +24,11 @@ function loadFavorItems(){
 }
 
 window.onload = function(){
+    document.checkBrowser();
     loadFavorItems();
 }
 
 function onSignIn_clicked(){
-    let popup = new Popup;
+    var popup = new Popup;
     popup.makePopup();
 }
