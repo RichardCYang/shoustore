@@ -7,7 +7,20 @@ const dbmng = require('./server/dbmanager');
 const hostname = '127.0.0.1';
 const port = 8090;
 
-let clientFiles = [];
+dbmng.createTableNeeded();
+
+function parseWSData( data ){
+    let lines = data.split("\n");
+    let key = "";
+    let value = "";
+    let arr = [];
+    lines.forEach((ln) => {
+        key = ln.split("=")[0];
+        value = ln.split("=")[1];
+        arr[key] = value;
+    });
+    return arr;
+}
 
 function removeRootNodeDir( filelist,rootdir ){
     let newArr = [];
@@ -37,10 +50,11 @@ function readdirSyncRecursive( path ){
     return filesArr;
 }
 
-clientFiles = readdirSyncRecursive('./client');
-clientFiles = removeRootNodeDir(clientFiles,'client');
-
 function getRealmPath( path ){
+    let clientFiles = [];
+    clientFiles = readdirSyncRecursive('./client');
+    clientFiles = removeRootNodeDir(clientFiles,'client');
+
     if( clientFiles.includes(path) ){
         return './client';
     }else{
@@ -67,8 +81,6 @@ function loadResource( res,path ){
     }
 }
 
-dbmng.createTableNeeded();
-
 const httpserver = http.createServer((req,res) => {
     if( req.method == 'GET' ){
         loadResource( res,req.url );
@@ -86,17 +98,16 @@ const webSocketServer = new ws.Server(
 );
 
 webSocketServer.on('connection',(ws,req) => {
-    console.log('접속');
     ws.on('message',(msg)=>{
-        console.log( msg.toString() );
-        if( msg.toString() === 'reqfavitem' ){
-            let files = fs.readdirSync('./server/imgs');
-            if( files ){
-                for( let i = 0; i < files.length; i++ ){
-                    let strbuff = fs.readFileSync('./server/imgs/' + files[i],'base64');
-                    ws.send( strbuff );
+        let data = parseWSData( msg.toString() );
+        if( data.ac === 'signin' ){
+            dbmng.findMemberByID( data.id ).then((rows) => {
+                if( rows.length == 0 ){
+                    ws.send("ERR_NOMEMBER");
                 }
-            }
+            }).catch((err) => {
+                console.log(err);
+            })
         }
     });
 });

@@ -30,7 +30,7 @@ document.checkBrowser = function(){
     return this.BROWSER_UNKNOWN;
 }
 
-document.addStyleSheet = function( link ){
+document.addStyleSheet = ( link ) => {
     let linkTag = document.createElement('link');
     linkTag.setAttribute('rel','stylesheet');
     linkTag.setAttribute('href',link);
@@ -38,7 +38,7 @@ document.addStyleSheet = function( link ){
     document.head.appendChild( linkTag );
 }
 
-document.createElementWithAttrib = function( elementName,atts ){
+document.createElementWithAttrib = ( elementName,atts ) => {
     let keys = Object.keys( atts );
     let keyCnt = keys.length;
 

@@ -8,7 +8,21 @@ function showErr( err ){
     }
 }
 
-exports.createTableNeeded = function(){
+async function selectSync( query ){
+    return new Promise((res,rej) => {
+        let db = new sqlite3.Database(shoustore_db,showErr);
+        db.all(query,(err,rows) => {
+            if( err ){
+                db.close( showErr );
+                return rej( err );
+            }
+            res(rows); 
+            db.close( showErr );
+        });
+    });
+}
+
+exports.createTableNeeded = () => {
     let db = new sqlite3.Database(shoustore_db,showErr);
     /* 회원 테이블 생성 */
     db.run('CREATE TABLE IF NOT EXISTS shoustore_member( nickname TEXT PRIMARY KEY,password TEXT UNIQUE,phone TEXT UNIQUE,point INTEGER,memberlevel INTEGER DEFAULT 0,regdate INTEGER NOT NULL )',showErr);
@@ -17,4 +31,9 @@ exports.createTableNeeded = function(){
     /* 구매 테이블 생성 */
     db.run('CREATE TABLE IF NOT EXISTS shoustore_bought( buyername TEXT PRIMARY KEY,buydate INTEGER NOT NULL,buyitem TEXT NOT NULL,buyamount INTEGER NOT NULL )',showErr);
     db.close(showErr);
+}
+
+exports.findMemberByID = async( nickname ) => {
+    /* 회원 테이블 조회 */
+    return await selectSync('SELECT nickname FROM shoustore_member WHERE nickname = "' + nickname + '"');
 }

@@ -1,7 +1,7 @@
 
-window.onload = function(){
+window.onload = () => {
     let loginBtn = document.getElementById('loginButton');
-    loginBtn.onclick = function(){
+    loginBtn.onclick = () => {
         let nicknameView = document.getElementById('nicknameInput');
         let passwdView = document.getElementById('passwdInput');
 
@@ -16,10 +16,17 @@ window.onload = function(){
 
         let websock = new WebSocket('ws://localhost:8090');
 
-        websock.onopen = function(event){
+        websock.onopen = (event) => {
             websock.send('ac=signin\n' + 
                          'id=' + nicknameView.value + '\n' +
-                         'pw=' + sha256(passwdView.value) + ' \n' );
+                         'pw=' + sha256(passwdView.value) );
         };
+
+        websock.onmessage = (event) => {
+            if( event.data === "ERR_NOMEMBER" ){
+                alert("등록된 사용자가 아닙니다!");
+                websock.close();
+            }
+        }
     }
 }
