@@ -24,8 +24,9 @@ function loadFavorItems(){
 }
 
 window.onload = function(){
-    if( document.checkBrowser() == document.BROWSER_IE ){
-        alert("구버전 IE는 지원하지 않아요...");
+    if( document.checkBrowser() == document.BROWSER_IE || document.checkBrowser() == document.BROWSER_IE11 ){
+        alert("IE는 지원하지 않아요...");
+        document.body.innerHTML = "";
         return;
     }
     loadFavorItems();

@@ -2,19 +2,16 @@
 @font-face {
     font-family:pto_reg;
     src: url(./fonts/PoetsenOne-Regular.ttf);
-    src: url(./fonts/PoetsenOne-Regular.woff) format('woff');
 }
 
 @font-face {
     font-family:hack_regular;
     src: url(./fonts/Hack-Regular.ttf);
-    src: url(./fonts/Hack-Regular.woff) format('woff');
 }
 
 @font-face {
     font-family:hack_bold;
     src: url(./fonts/Hack-Bold.ttf);
-    src: url(./fonts/Hack-Bold.woff) format('woff');
 }
 
 body {
@@ -24,7 +21,7 @@ body {
     /* 이 작업을 하지 않으면 화면크기를 1500 픽셀 이하로 줄였을 때, 상단 검색창이 옆에 있는 로고 옆으로 곂쳐버림 */
     min-width: 1500px;
     /* 화면 크기가 넘어갔을 때, 스크롤을 숨김 ( 동작은 함 ) */
-    -ms-overflow-style: none; /* For IE and Edge */
+    -ms-overflow-style: none; /* For Edge */
     scrollbar-width: none; /* For Firefox */
 }
 
@@ -89,16 +86,6 @@ footer {
     top: calc(50% - 52px);
 }
 
- /* IE10+ */
-@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
-    #userdiv {
-        width: 220px;
-        height: 24px;
-        left: calc(100% - 210px);
-        top: calc(50% - 52px);
-    }
-}
-
 #userdiv > button {
     background: none;
     border: none;
@@ -136,48 +123,9 @@ footer {
     width: 100%;
     height: 720px;
     float: left;
-    display: -ms-grid;
     display: grid;
-    -ms-grid-rows: 1fr 1fr;
     grid-template-rows: 1fr 1fr;
-    -ms-grid-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-}#itemprevcontainer > *:nth-child(1) {
-    -ms-grid-row: 1;
-    -ms-grid-column: 1;
-}#itemprevcontainer > *:nth-child(2) {
-    -ms-grid-row: 1;
-    -ms-grid-column: 2;
-}#itemprevcontainer > *:nth-child(3) {
-    -ms-grid-row: 1;
-    -ms-grid-column: 3;
-}#itemprevcontainer > *:nth-child(4) {
-    -ms-grid-row: 1;
-    -ms-grid-column: 4;
-}#itemprevcontainer > *:nth-child(5) {
-    -ms-grid-row: 1;
-    -ms-grid-column: 5;
-}#itemprevcontainer > *:nth-child(6) {
-    -ms-grid-row: 1;
-    -ms-grid-column: 6;
-}#itemprevcontainer > *:nth-child(7) {
-    -ms-grid-row: 2;
-    -ms-grid-column: 1;
-}#itemprevcontainer > *:nth-child(8) {
-    -ms-grid-row: 2;
-    -ms-grid-column: 2;
-}#itemprevcontainer > *:nth-child(9) {
-    -ms-grid-row: 2;
-    -ms-grid-column: 3;
-}#itemprevcontainer > *:nth-child(10) {
-    -ms-grid-row: 2;
-    -ms-grid-column: 4;
-}#itemprevcontainer > *:nth-child(11) {
-    -ms-grid-row: 2;
-    -ms-grid-column: 5;
-}#itemprevcontainer > *:nth-child(12) {
-    -ms-grid-row: 2;
-    -ms-grid-column: 6;
 }
 
 #signinForm {
@@ -221,23 +169,16 @@ footer {
     -webkit-transform: translateX(-50%);
     -ms-transform: translateX(-50%);
     transform: translateX(-50%);
-    display: -ms-grid;
     display: grid;
-    -ms-grid-columns: 1fr;
-    -ms-grid-rows: 1fr -10px 1fr;
 }
 
 .inputField > label {
-    -ms-grid-column: 1;
-    -ms-grid-row: 1;
     font-family: 'pto_reg';
     font-size: 11pt;
     color: #898989;
 }
 
 .inputField > input {
-    -ms-grid-column: 1;
-    -ms-grid-row: 2;
     display: block;
     border: 2px solid #cccccc;
     border-radius: 4px;
