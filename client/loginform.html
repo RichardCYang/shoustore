@@ -4,20 +4,22 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./main.css" type="text/css"> 
+    <link rel="stylesheet" href="./main.css" type="text/css">
+    <script src="./lib/js-sha256/sha256.js"></script>
+    <script src="./loginform.js"></script>
     <title>Share Houstore Sign</title>
-    <form id="signinForm">
+    <div id="signinForm">
         <div class="inputField">
             <label>User ID</label> 
-            <input type="text"/><br/> 
+            <input id="nicknameInput" type="text"/><br/> 
         </div>
         <div class="inputField">
             <label>Password</label> 
-            <input type="password"/><br/> 
+            <input id="passwdInput" type="password"/><br/> 
         </div>
         <button id="loginButton">Sign in</button>
         <button id="regButton">Sign up</button>
-    </form>
+    </div>
 </head>
 <body>
     <div>

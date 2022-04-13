@@ -88,6 +88,7 @@ const webSocketServer = new ws.Server(
 webSocketServer.on('connection',(ws,req) => {
     console.log('접속');
     ws.on('message',(msg)=>{
+        console.log( msg.toString() );
         if( msg.toString() === 'reqfavitem' ){
             let files = fs.readdirSync('./server/imgs');
             if( files ){

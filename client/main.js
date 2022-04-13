@@ -2,9 +2,9 @@
 document.addStyleSheet('./main.css');
 
 function loadFavorItems(){
-    var itemList = document.getElementsByClassName('itemview');
-    var websock = new WebSocket("ws://localhost:8090");
-    var i = 0;
+    let itemList = document.getElementsByClassName('itemview');
+    let websock = new WebSocket("ws://localhost:8090");
+    let i = 0;
 
     websock.onmessage = function(event){
         if( i > 11 ){
@@ -24,11 +24,14 @@ function loadFavorItems(){
 }
 
 window.onload = function(){
-    document.checkBrowser();
+    if( document.checkBrowser() == document.BROWSER_IE ){
+        alert("구버전 IE는 지원하지 않아요...");
+        return;
+    }
     loadFavorItems();
 }
 
 function onSignIn_clicked(){
-    var popup = new Popup;
+    let popup = new Popup;
     popup.makePopup();
 }
