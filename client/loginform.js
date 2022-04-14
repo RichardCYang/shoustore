@@ -1,18 +1,14 @@
 ﻿
-document.addStyleSheet('./formshared.css');
-document.addStyleSheet('./fontloader.css');
-
 window.onload = () => {
-    let loginBtn = document.getElementById('loginButton');
-    loginBtn.onclick = () => {
+    document.setOnClickByID('loginButton',() => {
         let nicknameView = document.getElementById('nicknameInput');
         let passwdView = document.getElementById('passwdInput');
 
-        if( nicknameView.value == undefined || nicknameView.value == null || nicknameView.value == "" ){
+        if( checkNullOrEmpty( nicknameView.value ) ){
             window.parent.document.showMessageBox( "잘못된 입력","아이디(닉네임)은 필수 입력사항 입니다!","error" );
             return;
         }
-        if( passwdView.value == undefined || passwdView.value == null || passwdView.value == "" ){
+        if( checkNullOrEmpty( passwdView.value ) ){
             window.parent.document.showMessageBox( "잘못된 입력","비밀번호는 필수 입력사항 입니다!","error" );
             return;
         }
@@ -31,9 +27,14 @@ window.onload = () => {
                 websock.close();
             }
         }
-    }
+    });
 
-    let regBtn = document.getElementById('regButton');
+    document.setOnClickByID('regButton',() => {
+        /* 회원가입 버튼을 누르면 기존 로그인 팝업창에서 회원가입 팝업창으로 리다이렉트 */
+        window.parent.mainPopup.changeLink('./regform.html');
+    });
+
+    /*let regBtn = document.getElementById('regButton');
     regBtn.onclick = () => {
         let nicknameView = document.getElementById('nicknameInput');        
         let passwdView = document.getElementById('passwdInput');
@@ -68,5 +69,5 @@ window.onload = () => {
             }
         }
 
-    }
+    }*/
 }

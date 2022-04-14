@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./fontloader.css">
+    <link rel="stylesheet" href="./formshared.css">
+    <link rel="stylesheet" href="./regform.css">
     <script src="./lib/js-sha256/sha256.js"></script>
     <script src="./meta.js"></script>
     <script src="./regform.js"></script>
@@ -11,7 +14,7 @@
     <div class="signinForm">
         <div class="inputField">
             <label>User ID</label> 
-            <input id="nicknameInput" type="text"/><br/> 
+            <input id="nicknameInput" type="text"><br/>
         </div>
         <div class="inputField">
             <label>Password</label> 
@@ -21,7 +24,10 @@
             <label>Confirm Password</label> 
             <input id="confirmPasswdInput" type="password"/><br/> 
         </div>
-        <button id="loginButton">Sign in</button>
+        <div class="inputField">
+            <label>Phone</label> 
+            <input id="confirmPasswdInput" type="tel"/><br/> 
+        </div>
         <button id="regButton">Sign up</button>
     </div>
 </head>

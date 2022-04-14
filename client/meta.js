@@ -1,4 +1,5 @@
 
+/* document metatables */
 document.BROWSER_UNKNOWN    = 0;
 document.BROWSER_IE         = 1;
 document.BROWSER_IE11       = 2
@@ -42,6 +43,11 @@ document.showMessageBox = ( title,content,icon ) => {
     swal( title,content,icon );
 }
 
+document.setOnClickByID = ( id,callback ) => {
+    let element = document.getElementById( id );
+    element.onclick = callback;
+}
+
 document.createElementWithAttrib = ( elementName,atts ) => {
     let keys = Object.keys( atts );
     let keyCnt = keys.length;
@@ -53,4 +59,9 @@ document.createElementWithAttrib = ( elementName,atts ) => {
     }
 
     return element;
+}
+
+/* window metatables */
+window.checkNullOrEmpty = (value) => {
+    return value == undefined ? true : value == null ? true : value == "" ? true : false;
 }

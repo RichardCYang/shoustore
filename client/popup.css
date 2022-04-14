@@ -34,6 +34,8 @@
     background-size: cover;
     background-color: transparent;
     border: none;
+    /* 이것을 하지않으면 팝업 주소가 변경되었을 때, 팝업 닫기 버튼이 안 눌려짐 */
+    z-index: 64;
 }
 
 .popupClose:hover {

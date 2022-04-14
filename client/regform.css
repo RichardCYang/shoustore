@@ -1,0 +1,8 @@
+
+#checkdupebtn {
+    position: absolute;
+    left: calc(100% - 35px);
+    top: 0px;
+    width: 30%;
+    height: 20px;
+}

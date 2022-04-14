@@ -1,7 +1,4 @@
 
-document.addStyleSheet('./fontloader.css');
-document.addStyleSheet('./main.css');
-
 function loadFavorItems(){
     let itemList = document.getElementsByClassName('itemview');
     let websock = new WebSocket("ws://localhost:8090");
@@ -31,9 +28,15 @@ window.onload = function(){
         return;
     }
     loadFavorItems();
+    window.mainPopup = new Popup;
 }
 
 function onSignIn_clicked(){
-    let popup = new Popup;
-    popup.makePopup();
+    window.mainPopup.setUrl('./loginform.html');
+    window.mainPopup.makePopup();
+}
+
+function onSignUp_clicked(){
+    window.mainPopup.setUrl('./regform.html');
+    window.mainPopup.makePopup();
 }
