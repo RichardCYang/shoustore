@@ -6,11 +6,11 @@ window.onload = () => {
         let passwdView = document.getElementById('passwdInput');
 
         if( nicknameView.value == undefined || nicknameView.value == null || nicknameView.value == "" ){
-            alert("아이디(닉네임)은 필수 입력사항 입니다!");
+            window.parent.document.showMessageBox( "잘못된 입력","아이디(닉네임)은 필수 입력사항 입니다!","error" );
             return;
         }
         if( passwdView.value == undefined || passwdView.value == null || passwdView.value == "" ){
-            alert("비밀번호는 필수 입력사항 입니다!");
+            window.parent.document.showMessageBox( "잘못된 입력","비밀번호는 필수 입력사항 입니다!","error" );
             return;
         }
 
@@ -24,7 +24,7 @@ window.onload = () => {
 
         websock.onmessage = (event) => {
             if( event.data === "ERR_NOMEMBER" ){
-                alert("등록된 사용자가 아닙니다!");
+                window.parent.document.showMessageBox( "등록되지 않은 사용자","등록된 사용자가 아닙니다!","info" );
                 websock.close();
             }
         }
