@@ -1,3 +1,6 @@
+﻿
+document.addStyleSheet('./formshared.css');
+document.addStyleSheet('./fontloader.css');
 
 window.onload = () => {
     let loginBtn = document.getElementById('loginButton');

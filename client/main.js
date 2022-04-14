@@ -1,4 +1,5 @@
 
+document.addStyleSheet('./fontloader.css');
 document.addStyleSheet('./main.css');
 
 function loadFavorItems(){

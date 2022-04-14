@@ -1,0 +1,59 @@
+
+.signinForm {
+    position: absolute;
+    width: 60%;
+    height: 60%; 
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    border: 16px solid rgb(255,208,103);
+}
+
+.signinForm > button {
+    position: relative;
+    width: 80%;
+    height: 30px;
+    top: calc(20%);
+    margin-top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgb(255,208,103);
+    border: none;
+    border-radius: 5px;
+    font-family: 'pto_reg';
+    color: #898989;
+    /* 로그인 버튼에 미묘한( subtile ) 외부 그림자 효과 적용 */
+    box-shadow:2px 2px 4px #d4d4d4;
+}
+
+.signinForm > button:hover {
+    background: rgb(255, 187, 39);
+}
+
+.inputField {
+    position: relative;
+    width: 80%;
+    height: 20px;
+    top: calc(12%);
+    margin-top: 30px;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    transform: translateX(-50%);
+    display: grid;
+}
+
+.inputField > label {
+    font-family: 'pto_reg';
+    font-size: 11pt;
+    color: #898989;
+}
+
+.inputField > input {
+    display: block;
+    border: 2px solid #cccccc;
+    border-radius: 4px;
+    height: 20px;
+    /* 입력칸에 미묘한( subtile ) 내부 그림자 효과 적용 */
+    box-shadow:inset 2px 2px 4px #d4d4d4;
+}

@@ -1,0 +1,15 @@
+
+@font-face {
+    font-family:pto_reg;
+    src: url(./fonts/PoetsenOne-Regular.ttf);
+}
+
+@font-face {
+    font-family:hack_regular;
+    src: url(./fonts/Hack-Regular.ttf);
+}
+
+@font-face {
+    font-family:hack_bold;
+    src: url(./fonts/Hack-Bold.ttf);
+}
