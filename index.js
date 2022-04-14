@@ -109,13 +109,8 @@ webSocketServer.on('connection',(ws,req) => {
                 console.log(err);
             })
         }
-    });
-});
 
-webSocketServer.on('connection', (ws, req) => {
-    ws.on('message', (msg) => {
-        let data = parseWSData( msg.toString() );
-        if ( data.ac === 'signup') {
+        if( data.ac === 'signup' ){
             dbmng.findMemberByID( data.id, data.phone ).then((rows) => {
                 if (rows == data.id || rows == data.phone) {
                     ws.send("ERR_ALREADYREGISTMEMBER")
@@ -124,5 +119,5 @@ webSocketServer.on('connection', (ws, req) => {
                 console.log(err);
             })
         }
-    })
-})
+    });
+});
