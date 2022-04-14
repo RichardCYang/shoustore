@@ -33,13 +33,13 @@ exports.createTableNeeded = () => {
     db.close(showErr);
 }
 
-exports.findMemberByID = async( nickname ) => {
+exports.findMemberByID = async( nickname, phoneNo ) => {
     /* 회원 테이블 조회 */
-    return await selectSync('SELECT nickname FROM shoustore_member WHERE nickname = "' + nickname + '"');
+    return await selectSync('SELECT nickname FROM shoustore_member WHERE nickname = "' + nickname + '", phone = "' + phoneNo +'"');
 }
 
 exports.regMember = async ( nickname, password, phoneNo) => {
     /* 회원 테이블 입력 */
     const today = Date.now();
-    return await selectSync('iNSERT INTO shoustore_member (nickname, password, phone, date) VALUES (' + nickname + ',' + password + ',' + phoneNo + ',' + today + ')')
+    return await selectSync('iNSERT INTO shoustore_member (nickname, password, phone, date) VALUES ("' + nickname + '","' + password + '","' + phoneNo + '",' + today + ')')
 }

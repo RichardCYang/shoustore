@@ -116,8 +116,8 @@ webSocketServer.on('connection', (ws, req) => {
     ws.on('message', (msg) => {
         let data = parseWSData( msg.toString() );
         if ( data.ac === 'signup') {
-            dbmng.findMemberByID( data.id ).then((rows) => {
-                if (rows == data.id) {
+            dbmng.findMemberByID( data.id, data.phone ).then((rows) => {
+                if (rows == data.id || rows == data.phone) {
                     ws.send("ERR_ALREADYREGISTMEMBER")
                 }
             }).catch((err) => {
