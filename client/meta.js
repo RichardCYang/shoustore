@@ -38,6 +38,10 @@ document.addStyleSheet = ( link ) => {
     document.head.appendChild( linkTag );
 }
 
+document.showMessageBox = ( title,content,icon ) => {
+    swal( title,content,icon );
+}
+
 document.createElementWithAttrib = ( elementName,atts ) => {
     let keys = Object.keys( atts );
     let keyCnt = keys.length;
