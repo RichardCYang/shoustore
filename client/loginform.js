@@ -30,8 +30,8 @@ window.onload = () => {
         }
     }
 
-    let registBtn = document.getElementById('regButton');
-    registBtn.onclick = () => {
+    let regBtn = document.getElementById('regButton');
+    regBtn.onclick = () => {
         let nicknameView = document.getElementById('nicknameInput');        
         let passwdView = document.getElementById('passwdInput');
         let phoneNoView = document.getElementById('phoneNoInput');

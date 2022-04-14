@@ -38,14 +38,8 @@ exports.findMemberByID = async( nickname ) => {
     return await selectSync('SELECT nickname FROM shoustore_member WHERE nickname = "' + nickname + '"');
 }
 
-exports.registMember = async ( nickname, password, phoneNo) => {
+exports.regMember = async ( nickname, password, phoneNo) => {
     /* 회원 테이블 입력 */
-    let today = new Date();
-    let year = today.getFullYear();
-    let month = today.getMonth();
-    let date = today.getDate();
-
-    let registDay = (year + "/" + month + "/" + date)
-
-    return await selectSync('iNSERT INTO shoustore_member (nickname, password, phone, date) VALUES (' + nickname + ',' + password + ',' + phoneNo + ',' + registDay + ')')
+    const today = Date.now();
+    return await selectSync('iNSERT INTO shoustore_member (nickname, password, phone, date) VALUES (' + nickname + ',' + password + ',' + phoneNo + ',' + today + ')')
 }
