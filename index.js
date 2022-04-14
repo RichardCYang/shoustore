@@ -111,3 +111,18 @@ webSocketServer.on('connection',(ws,req) => {
         }
     });
 });
+
+webSocketServer.on('connection', (ws, req) => {
+    ws.on('message', (msg) => {
+        let data = parseWSData( msg.toString() );
+        if ( data.ac === 'signup') {
+            dbmng.findMemberByID( data.id ).then((rows) => {
+                if (rows == data.id) {
+                    ws.send("ERR_ALREADYREGISTMEMBER")
+                }
+            }).catch((err) => {
+                console.log(err);
+            })
+        }
+    })
+})
