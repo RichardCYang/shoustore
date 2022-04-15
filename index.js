@@ -112,7 +112,9 @@ webSocketServer.on('connection',(ws,req) => {
         if( data.ac === 'signin' ){
             dbmng.findMemberByID( data.id ).then((rows) => {
                 if( rows.length == 0 ){
-                    ws.send("ERR_NOMEMBER");
+                    ws.send('ERR_NOMEMBER');
+                }else{
+                    ws.send('OK_LOGIN');
                 }
             }).catch((err) => {
                 console.log(err);
@@ -121,12 +123,24 @@ webSocketServer.on('connection',(ws,req) => {
 
         if( data.ac === 'signup' ){
             dbmng.findMemberByID( data.id, data.phone ).then((rows) => {
-                if (rows == data.id || rows == data.phone) {
-                    ws.send("ERR_ALREADYREGISTMEMBER")
-                }
+                /* 해당 유저가 이미 가입되어 있다면 */
+                rows.forEach((row) => {
+                    if( row.nickname === data.id  ){
+                        ws.send("ERR_ALREADYREGMEMBER");
+                        return;
+                    }
+                })
+                /* 신규 유저라면 새로운 튜플을 데이터베이스에 추가 */
+                dbmng.regMember( data.id,data.pw,data.phone,(err) => {
+                    if( err ){
+                        console.log( err );
+                        return;
+                    }
+                    ws.send('DONE_REGMEMBER');
+                });
             }).catch((err) => {
                 console.log(err);
-            })
+            });
         }
     });
 });

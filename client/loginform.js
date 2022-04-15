@@ -32,9 +32,14 @@ window.onload = () => {
         };
 
         websock.onmessage = (event) => {
-            if( event.data === "ERR_NOMEMBER" ){
-                window.parent.document.showMessageBox( "등록되지 않은 사용자","등록된 사용자가 아닙니다!","info" );
+            if( event.data === 'ERR_NOMEMBER' ){
+                window.parent.document.showMessageBox( '등록되지 않은 사용자','등록된 사용자가 아닙니다!','info' );
                 websock.close();
+                return;
+            }
+            if( event.data === 'OK_LOGIN' ){
+                window.parent.document.showMessageBox( '로그인 알림','로그인 성공!','info' );
+                return;
             }
         }
     });

@@ -44,8 +44,15 @@ exports.findMemberByID = async( nickname, phoneNo ) => {
     return await selectSync(query);
 }
 
-exports.regMember = async ( nickname, password, phoneNo) => {
+exports.regMember = ( nickname, password, phoneNo,callback) => {
     /* 회원 테이블 입력 */
-    const today = Date.now();
-    return await selectSync('iNSERT INTO shoustore_member (nickname, password, phone, date) VALUES ("' + nickname + '","' + password + '","' + phoneNo + '",' + today + ')')
+    let db = new sqlite3.Database(shoustore_db,showErr);
+    let today = Date.now();
+
+    let cb = showErr;
+    if( callback ){
+        cb = callback;
+    }
+
+    db.run('INSERT INTO shoustore_member (nickname, password, phone, regdate) VALUES ("' + nickname + '","' + password + '","' + phoneNo + '",' + today + ')',cb);
 }
