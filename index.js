@@ -3,6 +3,7 @@ const http = require('http');
 const fs = require('fs');
 const ws = require('ws');
 const dbmng = require('./server/dbmanager');
+const sessionmng = require('./server/sessionmanager');
 
 const hostname = '127.0.0.1';
 const port = 8090;
@@ -114,6 +115,7 @@ webSocketServer.on('connection',(ws,req) => {
                 if( rows.length == 0 ){
                     ws.send('ERR_NOMEMBER');
                 }else{
+                    let session = sessionmng.createSession( data.id );
                     ws.send('OK_LOGIN');
                 }
             }).catch((err) => {
