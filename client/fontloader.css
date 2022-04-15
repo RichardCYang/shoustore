@@ -13,3 +13,8 @@
     font-family:hack_bold;
     src: url(./fonts/Hack-Bold.ttf);
 }
+
+@font-face {
+    font-family:nanum_barun_gothic_yethangul;
+    src: url(./fonts/NanumBarunGothic-YetHangul.ttf);
+}
