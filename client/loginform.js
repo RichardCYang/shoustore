@@ -12,6 +12,16 @@ window.onload = () => {
             window.parent.document.showMessageBox( '잘못된 입력','비밀번호는 필수 입력사항 입니다!','error' );
             return;
         }
+        if( nicknameView.value.search(/[!=<>?+-]/g) > -1 ){
+            window.parent.document.showMessageBox( '보안 경고','아이디에 적절하지 않은 특수문자가 포함되었습니다!','warning' );
+            nicknameView.value = '';
+            return;
+        }
+        if( nicknameView.value.search(/\b(union|select|from|where|or|and|null|is)\b/gi) > -1 ){
+            window.parent.document.showMessageBox( '보안 경고','아이디에 적절하지 않은 키워드가 포함되었습니다!','warning' );
+            nicknameView.value = '';
+            return;
+        }
 
         let websock = new WebSocket('ws://localhost:8090');
 

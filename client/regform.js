@@ -22,6 +22,16 @@ window.onload = () => {
             window.parent.document.showMessageBox( '잘못된 입력','전화번호는 필수 입력사항 입니다!','error' ); 
             return;
         }
+        if( nicknameView.value.search(/[!=<>?+-]/g) > -1 ){
+            window.parent.document.showMessageBox( '보안 경고','아이디에 적절하지 않은 특수문자가 포함되었습니다!','warning' );
+            nicknameView.value = '';
+            return;
+        }
+        if( nicknameView.value.search(/\b(union|select|from|where|or|and|null|is)\b/gi) > -1 ){
+            window.parent.document.showMessageBox( '보안 경고','아이디에 적절하지 않은 키워드가 포함되었습니다!','warning' );
+            nicknameView.value = '';
+            return;
+        }
         /* 전화번호에 '-' 또는 '+' 문자가 포함되어있는지 확인 */
         /* 숫자형식 외의 서식은 모두 예외 처리 */
         if( phoneNoView.value.search(/[\D]/g) > -1 ){
@@ -37,8 +47,14 @@ window.onload = () => {
         for(let i = 0; i < passwdView.value.length; i++){
             if( i > 1 ){
                 if( passwdView.value.charCodeAt(i - 1) === (passwdView.value.charCodeAt(i) - 1) ){
-                    if(  passwdView.value.charCodeAt(i - 2) === (passwdView.value.charCodeAt(i - 1) - 1) ){
+                    if( passwdView.value.charCodeAt(i - 2) === (passwdView.value.charCodeAt(i - 1) - 1) ){
                         window.parent.document.showMessageBox( '보안 경고','비밀번호에 3자리 이상 연속된 문자가 포함되어있습니다!','warning' );
+                        return;
+                    }
+                }
+                if( passwdView.value.charCodeAt(i - 1) === passwdView.value.charCodeAt(i) ){
+                    if( passwdView.value.charCodeAt(i - 2) === passwdView.value.charCodeAt(i - 1) ){
+                        window.parent.document.showMessageBox( '보안 경고','비밀번호에 3자리 이상 동일한 문자가 포함되어있습니다!','warning' );
                         return;
                     }
                 }

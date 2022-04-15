@@ -100,6 +100,15 @@ const webSocketServer = new ws.Server(
 webSocketServer.on('connection',(ws,req) => {
     ws.on('message',(msg)=>{
         let data = parseWSData( msg.toString() );
+        /* 인젝션 방지를 위한 입력 데이터 필터링( 정규식 ) */
+        if( data.id ){
+            if( data.id.search(/[!=<>?+-]/g) > -1 ){
+                return;
+            }
+            if( data.id.search(/\b(union|select|from|where|or|and|null|is)\b/gi) > -1 ){
+                return;
+            }
+        }
         if( data.ac === 'signin' ){
             dbmng.findMemberByID( data.id ).then((rows) => {
                 if( rows.length == 0 ){
