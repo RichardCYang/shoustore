@@ -110,19 +110,28 @@ webSocketServer.on('connection',(ws,req) => {
                 return;
             }
         }
+        /* 로그아웃 요청을 받았을 때 */
+        if( data.ac === 'signout' ){
+            /* 해당 키값에 해당하는 세션 제거 */
+            sessionmng.destroySession( data.key );
+            ws.send('DONE_DESTROYSESSION');
+        }
+        /* 로그인 요청을 받았을 때 */
         if( data.ac === 'signin' ){
             dbmng.findMemberByID( data.id ).then((rows) => {
                 if( rows.length == 0 ){
                     ws.send('ERR_NOMEMBER');
                 }else{
+                    /* 새로운 세션 생성 */
                     let session = sessionmng.createSession( data.id );
-                    ws.send('OK_LOGIN');
+                    /* 로그인 성공 시, 계정에 대한 세션 정보 전송 -> 클라이언트 */
+                    ws.send('session?id=' + session.id + '&expired=' + session.expired + '&username=' + session.username);
                 }
             }).catch((err) => {
                 console.log(err);
             })
         }
-
+        /* 회원가입 요청을 받았을 때 */
         if( data.ac === 'signup' ){
             dbmng.findMemberByID( data.id, data.phone ).then((rows) => {
                 /* 해당 유저가 이미 가입되어 있다면 */

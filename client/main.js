@@ -1,24 +1,16 @@
 
-function loadFavorItems(){
-    let itemList = document.getElementsByClassName('itemview');
-    let websock = new WebSocket("ws://localhost:8090");
-    let i = 0;
+window.onstorage = (event) => {
+    let usermenu_1 = document.getElementById('userdiv_menu1');
+    let usermenu_2 = document.getElementById('userdiv_menu2');
 
-    websock.onmessage = (event) => {
-        if( i > 11 ){
-            websock.close();
-        }
-        if( itemList ){
-            if( itemList[i].children ){
-                itemList[i].children[0].src = "data:image/png;base64, " + event.data.toString();
-                i = i + 1;
-            }
-        }
-    };
-
-    websock.onopen = (event) => {
-        websock.send('reqfavitem');
-    };
+    if( event.storageArea.shoustore_key ){
+        usermenu_2.innerHTML = event.storageArea.shoustore_username;
+        usermenu_1.innerHTML = 'Sign out';
+        usermenu_1.onclick = onSignOut_clicked;
+    }else{
+        usermenu_1.innerHTML = 'Sign in';
+        usermenu_1.onclick = onSignIn_clicked;
+    }
 }
 
 window.onload = function(){
@@ -27,8 +19,22 @@ window.onload = function(){
         document.body.innerHTML = "";
         return;
     }
-    loadFavorItems();
     window.mainPopup = new Popup;
+}
+
+function onSignOut_clicked(){
+    let websock = new WebSocket("ws://localhost:8090");
+    websock.onopen = (event) => {
+        websock.send('ac=signout\n' + 'key=' + sessionStorage.getItem('shoustore_key'));
+    };
+    websock.onmessage = (event) => {
+        if( event.data == 'DONE_DESTROYSESSION' ){
+            /* 클라이언트 세션 정보 삭제 */
+            sessionStorage.clear();
+            window.location.reload();
+            websock.close();
+        }
+    }
 }
 
 function onSignIn_clicked(){

@@ -37,9 +37,26 @@ window.onload = () => {
                 websock.close();
                 return;
             }
-            if( event.data === 'OK_LOGIN' ){
+            /* 로그인이 성공하였을 때, 새로 발급된 세션 값을 받아옴 */
+            if( event.data.indexOf("session?") > -1 ){
+                /* 로그인 성공 시, 성공 메세지 띄우기 */
                 window.parent.document.showMessageBox( '로그인 알림','로그인 성공!','info' );
-                return;
+                /* 세션 정보를 얻어왔을 때 */
+                /* 세션 값에서 만료시간과 고윳값을 파싱 */
+                let parseData = event.data.split("?")[1];
+                parseData = parseData.split("&");
+                
+                let id = parseData[0].split(/id=(.*?)/g)[2];
+                let expired = parseData[1].split(/expired=(.*?)/g)[2];
+                let username = parseData[2].split(/username=(.*?)/g)[2];
+                
+                sessionStorage.setItem('shoustore_key',id);
+                sessionStorage.setItem('shoustore_expired',expired);
+                sessionStorage.setItem('shoustore_username',username);
+
+                websock.close();
+                /* 로그인 팝업창 닫기 */
+                window.parent.document.getElementsByClassName('popupClose')[0].click();
             }
         }
     });
