@@ -65,10 +65,12 @@ footer {
 }
 
 #userdiv {
-    width: 200px;
+    width: -webkit-fit-content;
+    width: fit-content;
     height: 24px;
-    left: calc(100% - 200px);
+    left: 0px;
     top: calc(50% - 52px);
+    float: right;
 }
 
 #userdiv > button {

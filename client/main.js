@@ -1,16 +1,40 @@
 
-window.onstorage = (event) => {
+window.updateSession = (data) => {
     let usermenu_1 = document.getElementById('userdiv_menu1');
     let usermenu_2 = document.getElementById('userdiv_menu2');
 
-    if( event.storageArea.shoustore_key ){
-        usermenu_2.innerHTML = event.storageArea.shoustore_username;
+    if( data.shoustore_username ){
+        usermenu_2.innerHTML = data.shoustore_username + ', Welcome to our site ';
         usermenu_1.innerHTML = 'Sign out';
         usermenu_1.onclick = onSignOut_clicked;
+        usermenu_2.onclick = null;
     }else{
         usermenu_1.innerHTML = 'Sign in';
         usermenu_1.onclick = onSignIn_clicked;
+        usermenu_2.onclick = onSignUp_clicked;
     }
+}
+
+window.startSessionTimer = (time) => {
+    this.curSessionTime = time * 60;
+    
+    let userdiv = document.getElementById('userdiv'); 
+    let timerDisplay = document.createElement('button');
+    let min = 0;
+    let sec = 0;
+
+    userdiv.appendChild( timerDisplay );
+
+    this.sessionTimer = setInterval(() => {
+        window.curSessionTime = window.curSessionTime - 1;
+        min = Math.round( window.curSessionTime / 60 );
+        sec = Math.round( window.curSessionTime % 60 );
+        timerDisplay.innerHTML = min + ":" + sec;
+
+        if( window.curSessionTime == 0 ){
+            clearInterval(window.sessionTimer);
+        }
+    },1000);
 }
 
 window.onload = function(){
@@ -20,21 +44,29 @@ window.onload = function(){
         return;
     }
     window.mainPopup = new Popup;
+
+    updateSession( localStorage );
 }
 
-function onSignOut_clicked(){
+function signout(){
     let websock = new WebSocket("ws://localhost:8090");
     websock.onopen = (event) => {
-        websock.send('ac=signout\n' + 'key=' + sessionStorage.getItem('shoustore_key'));
+        websock.send('ac=signout\n' + 'key=' + localStorage.getItem('shoustore_key'));
     };
     websock.onmessage = (event) => {
         if( event.data == 'DONE_DESTROYSESSION' ){
             /* 클라이언트 세션 정보 삭제 */
-            sessionStorage.clear();
-            window.location.reload();
+            localStorage.clear();
+            document.showMessageBox( '로그아웃 알림','로그아웃 되었습니다!','info' ).then(() => {
+                window.location.reload();
+            });
             websock.close();
         }
     }
+}
+
+function onSignOut_clicked(){
+    signout();
 }
 
 function onSignIn_clicked(){

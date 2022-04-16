@@ -40,7 +40,7 @@ document.addStyleSheet = ( link ) => {
 }
 
 document.showMessageBox = ( title,content,icon ) => {
-    swal( title,content,icon );
+    return swal( title,content,icon );
 }
 
 document.setOnClickByID = ( id,callback ) => {
