@@ -1,0 +1,37 @@
+
+body {
+    margin: 0px;
+}
+
+#itemprevcontainer {
+    position: absolute;
+    width: 100%;
+    height: 90%;
+    float: left;
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+
+#maindownbanner {
+    position: absolute;
+    top: 90%;
+    width: 100%;
+    height: 10%;
+    background: #c1c1c1;
+}
+
+.itemview {
+    background: white;
+    margin: 2px;
+    border-radius: 5px;
+    box-shadow: 2px 2px 4px #b5b5b5;
+}
+
+.itemview > img {
+    position: relative;
+    width: 100%;
+    height: 70%;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+}

@@ -48,12 +48,20 @@ menu {
     margin: 0em;
 }
 
+main {
+    display: flex;
+    min-height: 800px;
+}
+
 main > div {
     position: relative;
 }
 
 footer {
-
+    position: relative;
+    width: 100%;
+    height: 120px;
+    background: #252525;
 }
 
 #searchdiv {
@@ -105,27 +113,8 @@ footer {
     box-shadow:inset 0px 2px #e7e7e7;
 }
 
-#itemprevcontainer {
+#mainContainer {
     background-color: rgb(236, 236, 236);
     width: 100%;
-    height: 720px;
-    float: left;
-    display: grid;
-    grid-template-rows: 1fr 1fr;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-}
-
-.itemview {
-    background: white;
-    margin: 2px;
-    border-radius: 5px;
-    box-shadow: 2px 2px 4px #b5b5b5;
-}
-
-.itemview > img {
-    position: relative;
-    width: 100%;
-    height: 70%;
-    border-top-right-radius: 5px;
-    border-top-left-radius: 5px;
+    height: 800px;
 }
