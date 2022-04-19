@@ -4,6 +4,11 @@ const shoustore_db = "./server/shoustore.db";
 
 function showErr( err ){
     if( err ){
+        if( err.toString().indexOf("constraint") > -1 ){
+            if( err.toString().indexOf("UNIQUE") > -1 ){
+                return;
+            }
+        }
         console.log( err );
     }
 }
@@ -30,7 +35,22 @@ exports.createTableNeeded = () => {
     db.run('CREATE TABLE IF NOT EXISTS shoustore_sold( sellername TEXT PRIMARY KEY,selldate INTEGER NOT NULL,sellitem TEXT NOT NULL )',showErr);
     /* 구매 테이블 생성 */
     db.run('CREATE TABLE IF NOT EXISTS shoustore_bought( buyername TEXT PRIMARY KEY,buydate INTEGER NOT NULL,buyitem TEXT NOT NULL,buyamount INTEGER NOT NULL )',showErr);
+    /* 상품 테이블 생성 */
+    db.run('CREATE TABLE IF NOT EXISTS shoustore_item( product_id TEXT PRIMARY KEY,name TEXT NOT NULL,itemdesc TEXT,stockcnt INTEGER DEFAULT 0,makername TEXT,category INTEGER )',showErr);
+    /* 카테고리 테이블 생성*/
+    db.run('CREATE TABLE IF NOT EXISTS shoustore_category( category_name TEXT PRIMARY KEY )',showErr);
     db.close(showErr);
+}
+
+exports.addCategory = ( category_name ) => {
+    let db = new sqlite3.Database(shoustore_db,showErr);
+    db.run('INSERT INTO shoustore_category VALUES ("' + category_name + '")',showErr);
+}
+
+exports.findCategories = async() => {
+    /* 카테고리 테이블 조회 */
+    let query = 'SELECT category_name FROM shoustore_category';
+    return await selectSync( query );
 }
 
 exports.findMemberByID = async( nickname, phoneNo ) => {

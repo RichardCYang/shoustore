@@ -37,6 +37,24 @@ window.startSessionTimer = (time) => {
     },1000);
 }
 
+function loadCategories(){
+    let catroot = document.getElementById('categories');
+    let websock = new WebSocketClient;
+    websock.open();
+    websock.onOpen((event) => {
+        websock.send('ac=getcats');
+    });
+    websock.onReply((event) => {
+        let cats = JSON.parse( event.data );
+        cats.forEach( row => {
+            let btn = document.createElement('button');
+            btn.innerHTML = row.category_name + '';
+            catroot.appendChild(btn);
+        });
+        websock.close();
+    });
+}
+
 window.onload = function(){
     if( document.checkBrowser() == document.BROWSER_IE || document.checkBrowser() == document.BROWSER_IE11 ){
         alert("IE는 지원하지 않아요...");
@@ -46,6 +64,7 @@ window.onload = function(){
     window.mainPopup = new Popup;
 
     updateSession( localStorage );
+    loadCategories();
 }
 
 function signout(){

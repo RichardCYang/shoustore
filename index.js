@@ -9,6 +9,14 @@ const hostname = '127.0.0.1';
 const port = 8090;
 
 dbmng.createTableNeeded();
+/* 카테고리 임시로 추가 (추후 관리자 페이지를 따로 만들어서 카테고리 추가/관리 예정) */
+dbmng.addCategory("Food");
+dbmng.addCategory("Electronics");
+dbmng.addCategory("Clothes");
+dbmng.addCategory("Cars");
+dbmng.addCategory("Pets");
+dbmng.addCategory("Sports");
+dbmng.addCategory("Outdoor");
 
 function parseWSData( data ){
     let lines = data.split("\n");
@@ -109,6 +117,15 @@ webSocketServer.on('connection',(ws,req) => {
             if( data.id.search(/\b(union|select|from|where|or|and|null|is)\b/gi) > -1 ){
                 return;
             }
+        }
+        /* 서버에 등록되어있는 카테고리 정보 불러오는 요청을 받았을 때 */
+        if( data.ac === 'getcats' ){
+            /* 카테고리 정보 조회 */
+            dbmng.findCategories().then((rows) => {
+                ws.send( JSON.stringify( rows ));
+            }).catch((err) => {
+                console.log(err);
+            });
         }
         /* 로그아웃 요청을 받았을 때 */
         if( data.ac === 'signout' ){
