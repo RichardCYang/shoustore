@@ -74,7 +74,10 @@ function getRealmPath( path ){
 function loadResource( res,path ){
     if( path == '/' ){
         path = '/index.html';
-    }  
+    }
+    if( path.indexOf("?") > -1 ){
+        path = path.split("?")[0];
+    }
     try{
         let rawData;
         if( path.endsWith('.svg') ){

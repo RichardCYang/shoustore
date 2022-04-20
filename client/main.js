@@ -39,6 +39,7 @@ window.startSessionTimer = (time) => {
 
 function loadCategories(){
     let catroot = document.getElementById('categories');
+    let main = document.getElementById('mainContainer');
     let websock = new WebSocketClient;
     websock.open();
     websock.onOpen((event) => {
@@ -49,6 +50,9 @@ function loadCategories(){
         cats.forEach( row => {
             let btn = document.createElement('button');
             btn.innerHTML = row.category_name + '';
+            btn.onclick = () => {
+                main.src = './boardview.html?cat=' + row.category_name;
+            }
             catroot.appendChild(btn);
         });
         websock.close();
