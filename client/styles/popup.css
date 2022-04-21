@@ -30,7 +30,7 @@
     height: 48px;
     left: calc(100% - 48px - 12px);
     top: calc(12px);
-    background-image: url(./icons/closeicon.svg);
+    background-image: url(../icons/closeicon.svg);
     background-size: cover;
     background-color: transparent;
     border: none;
@@ -39,5 +39,5 @@
 }
 
 .popupClose:hover {
-    background-image: url(./icons/closeicon_active.svg);
+    background-image: url(../icons/closeicon_active.svg);
 }

@@ -1,5 +1,5 @@
 
-document.addStyleSheet('./popup.css');
+document.addStyleSheet('./styles/popup.css');
 
 class Popup {
     constructor(){
