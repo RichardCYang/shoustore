@@ -17,6 +17,9 @@ dbmng.addCategory("Cars");
 dbmng.addCategory("Pets");
 dbmng.addCategory("Sports");
 dbmng.addCategory("Outdoor");
+/* 상품 임시로 추가 */
+dbmng.addItem('Classic Radio','Electronics');
+dbmng.addItem('Supermicro Server','Electronics');
 
 function parseWSData( data ){
     let lines = data.split("\n");
@@ -121,11 +124,19 @@ webSocketServer.on('connection',(ws,req) => {
                 return;
             }
         }
+        /* 카테고리에 해당하는 아이템 정보들 검색 요청을 받았을 때 */
+        if( data.ac === 'getcatitems' ){
+            dbmng.findItemsByCategory( data.cat ).then((rows) => {
+                ws.send( JSON.stringify(rows) );
+            }).catch((err) => {
+                console.log(err);
+            });
+        }
         /* 서버에 등록되어있는 카테고리 정보 불러오는 요청을 받았을 때 */
         if( data.ac === 'getcats' ){
             /* 카테고리 정보 조회 */
             dbmng.findCategories().then((rows) => {
-                ws.send( JSON.stringify( rows ));
+                ws.send( JSON.stringify( rows ) );
             }).catch((err) => {
                 console.log(err);
             });

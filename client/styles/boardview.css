@@ -1,0 +1,10 @@
+
+.oopsimg {
+    background-image: url('../icons/oppsicon.svg');
+    background-size: cover;
+    position: absolute;
+    width: 420px;
+    height: 420px;
+    left: calc(50% - 210px);
+    top: calc(50% - 210px);
+}

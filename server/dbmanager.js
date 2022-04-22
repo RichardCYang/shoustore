@@ -36,7 +36,7 @@ exports.createTableNeeded = () => {
     /* 구매 테이블 생성 */
     db.run('CREATE TABLE IF NOT EXISTS shoustore_bought( buyername TEXT PRIMARY KEY,buydate INTEGER NOT NULL,buyitem TEXT NOT NULL,buyamount INTEGER NOT NULL )',showErr);
     /* 상품 테이블 생성 */
-    db.run('CREATE TABLE IF NOT EXISTS shoustore_item( product_id TEXT PRIMARY KEY,name TEXT NOT NULL,itemdesc TEXT,stockcnt INTEGER DEFAULT 0,makername TEXT,category INTEGER )',showErr);
+    db.run('CREATE TABLE IF NOT EXISTS shoustore_item( product_id TEXT PRIMARY KEY,name TEXT NOT NULL,itemdesc TEXT,stockcnt INTEGER DEFAULT 0,makername TEXT,category_name TEXT NOT NULL,price INTEGER )',showErr);
     /* 카테고리 테이블 생성*/
     db.run('CREATE TABLE IF NOT EXISTS shoustore_category( category_name TEXT PRIMARY KEY )',showErr);
     db.close(showErr);
@@ -47,9 +47,29 @@ exports.addCategory = ( category_name ) => {
     db.run('INSERT INTO shoustore_category VALUES ("' + category_name + '")',showErr);
 }
 
+exports.addItem = ( name,category_name,stockcnt = 1 ) => {
+    let db = new sqlite3.Database(shoustore_db,showErr);
+    let column = 'name,category_name';
+    let value = '"' + name + '","' + category_name + '"';
+
+    if( stockcnt ){
+        column = column + ',stockcnt';
+        value = value + ',' + stockcnt;
+    }
+
+    let query = 'INSERT INTO shoustore_item (' + column + ') VALUES(' + value + ')';
+    db.run(query);
+}
+
 exports.findCategories = async() => {
     /* 카테고리 테이블 조회 */
     let query = 'SELECT category_name FROM shoustore_category';
+    return await selectSync( query );
+}
+
+exports.findItemsByCategory = async( category_name ) => {
+    /* 특정 카테고리에 해당하는 테이블 조회 */
+    let query = 'SELECT * FROM shoustore_item WHERE category_name = "' + category_name + '"';
     return await selectSync( query );
 }
 

@@ -61,7 +61,41 @@ document.createElementWithAttrib = ( elementName,atts ) => {
     return element;
 }
 
+document.clearBody = () => {
+    document.body.innerHTML = '';
+}
+
 /* window metatables */
 window.checkNullOrEmpty = (value) => {
     return value == undefined ? true : value == null ? true : value == "" ? true : false;
 }
+
+window.parseGetParams = (url) => {
+    if( checkNullOrEmpty( url ) ){
+        return;
+    }
+
+    let tokenRegex = url.split(/[\?&](.*?)=(.*?)&*/gi);
+    let token = [];
+    
+    tokenRegex.forEach((block,idx) => {
+        if( idx == 0 ){
+            return;
+        }
+        if( block !== '' ){
+            token.push( block );
+        }
+    });
+
+    tokenRegex = [];
+
+    token.forEach((item,idx) => {
+        if( idx % 2 == 0 ){
+            if( token[idx + 1] ){
+                tokenRegex[item] = token[idx + 1];
+            }
+        }
+    });
+
+    return tokenRegex;
+} 
