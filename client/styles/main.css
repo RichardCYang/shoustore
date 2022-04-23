@@ -4,7 +4,7 @@ body {
     margin: 0px;
     /* 화면 넓이가 1500 픽셀보다 작아지면 더 이상 내부요소들이 줄어드는것이 아니라 나머지 영역이 짤리게 만듬 */
     /* 이 작업을 하지 않으면 화면크기를 1500 픽셀 이하로 줄였을 때, 상단 검색창이 옆에 있는 로고 옆으로 곂쳐버림 */
-    min-width: 1500px;
+    min-width: 1200px;
     /* 화면 크기가 넘어갔을 때, 스크롤을 숨김 ( 동작은 함 ) */
     -ms-overflow-style: none; /* For Edge */
     scrollbar-width: none; /* For Firefox */
@@ -39,16 +39,19 @@ nav > div {
 }
 
 menu {
-    text-align: center;
+    position: absolute;
     width: 100%;
     height: 24px;
     background: rgba(227,227,227,0.74);
     margin-block-start: 0em;
     margin-block-end: 0em;
     padding-inline-start: 0em;
+    text-align: center;
 }
 
 main {
+    position: relative;
+    width: 100%;
     display: flex;
     min-height: 800px;
 }
@@ -90,7 +93,7 @@ footer {
 }
 
 menu > div {
-    margin-left: 190px;
+    /*margin-left: 190px;*/
 }
 
 menu > div > button {

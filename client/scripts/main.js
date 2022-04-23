@@ -48,7 +48,7 @@ function loadCategories(){
     websock.onReply((event) => {
         let cats = JSON.parse( event.data );
         cats.forEach( row => {
-            let btn = document.createElement('button');
+            let btn = document.createElementWithAttrib('button',{'class':'unselectable'});
             btn.innerHTML = row.category_name + '';
             btn.onclick = () => {
                 main.src = './boardview.html?cat=' + row.category_name;
@@ -100,4 +100,9 @@ function onSignIn_clicked(){
 function onSignUp_clicked(){
     window.mainPopup.setUrl('./regform.html');
     window.mainPopup.makePopup();
+}
+
+function onGoHome_clicked(){
+    let main = document.getElementById('mainContainer');
+    main.src = './mainview.html';
 }

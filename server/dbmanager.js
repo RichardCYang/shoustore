@@ -1,6 +1,7 @@
 
 const sqlite3 = require('sqlite3').verbose();
 const shoustore_db = "./server/shoustore.db";
+const conlog = require('./consolelog');
 
 function showErr( err ){
     if( err ){

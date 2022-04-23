@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./styles/fontloader.css">
     <link rel="stylesheet" href="./styles/main.css"> 
+    <link rel="stylesheet" href="./styles/sharedclass.css"> 
     <script src="./scripts/lib/sweetalert/sweetalert.min.js"></script>
     <script src="./scripts/websockcli.js"></script>
     <script src="./scripts/meta.js"></script>
@@ -14,15 +15,15 @@
 </head>
 <body>
     <nav>
-        <h1>Share Houstore</h1>
+        <h1 class="unselectable clickable" onclick="onGoHome_clicked()">Share Houstore</h1>
         <div id="searchdiv">
             <input type="text"/>
             <button></button>
         </div>
         <div id="userdiv">
-            <button id="userdiv_menu1" onclick="onSignIn_clicked()">Sign in</button>
-            <button id="userdiv_menu2" onclick="onSignUp_clicked()">Sign up</button>
-            <button id="userdiv_menu3">Help</button>
+            <button id="userdiv_menu1" class="unselectable" onclick="onSignIn_clicked()">Sign in</button>
+            <button id="userdiv_menu2" class="unselectable" onclick="onSignUp_clicked()">Sign up</button>
+            <button id="userdiv_menu3" class="unselectable">Help</button>
         </div> 
     </nav>
     <menu>

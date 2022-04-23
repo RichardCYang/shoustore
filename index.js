@@ -1,3 +1,7 @@
+const conlog = require('./server/consolelog');
+
+conlog.coninfo('Server started...');
+conlog.coninfo('Importing modules...');
 
 const http = require('http');
 const fs = require('fs');
@@ -5,8 +9,12 @@ const ws = require('ws');
 const dbmng = require('./server/dbmanager');
 const sessionmng = require('./server/sessionmanager');
 
+conlog.confin('Importing modules');
+
 const hostname = '127.0.0.1';
 const port = 8090;
+
+conlog.coninfo('Initializing database...');
 
 dbmng.createTableNeeded();
 /* 카테고리 임시로 추가 (추후 관리자 페이지를 따로 만들어서 카테고리 추가/관리 예정) */
@@ -20,6 +28,8 @@ dbmng.addCategory("Outdoor");
 /* 상품 임시로 추가 */
 dbmng.addItem('Classic Radio','Electronics');
 dbmng.addItem('Supermicro Server','Electronics');
+
+conlog.confin("Initializing database");
 
 function parseWSData( data ){
     let lines = data.split("\n");
@@ -96,6 +106,8 @@ function loadResource( res,path ){
     }
 }
 
+conlog.coninfo('Starting HTTP Internal Server...');
+
 const httpserver = http.createServer((req,res) => {
     if( req.method == 'GET' ){
         loadResource( res,req.url );
@@ -105,6 +117,8 @@ const httpserver = http.createServer((req,res) => {
         res.end();
     }
 }).listen( port );
+
+conlog.confin('Starting HTTP Internal Server');
 
 const webSocketServer = new ws.Server(
     {
