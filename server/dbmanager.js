@@ -14,6 +14,7 @@ function showErr( err ){
     }
 }
 
+/* 동기적(Sync)으로 조회(Select) 쿼리를 처리하기 위한 함수 */
 async function selectSync( query ){
     return new Promise((res,rej) => {
         let db = new sqlite3.Database(shoustore_db,showErr);
@@ -37,7 +38,7 @@ exports.createTableNeeded = () => {
     /* 구매 테이블 생성 */
     db.run('CREATE TABLE IF NOT EXISTS shoustore_bought( buyername TEXT PRIMARY KEY,buydate INTEGER NOT NULL,buyitem TEXT NOT NULL,buyamount INTEGER NOT NULL )',showErr);
     /* 상품 테이블 생성 */
-    db.run('CREATE TABLE IF NOT EXISTS shoustore_item( product_id TEXT PRIMARY KEY,name TEXT NOT NULL,itemdesc TEXT,stockcnt INTEGER DEFAULT 0,makername TEXT,category_name TEXT NOT NULL,price INTEGER )',showErr);
+    db.run('CREATE TABLE IF NOT EXISTS shoustore_item( product_id INTEGER PRIMARY KEY AUTOINCREMENT,name TEXT NOT NULL UNIQUE,itemdesc TEXT,stockcnt INTEGER DEFAULT 0,makername TEXT,category_name TEXT NOT NULL,price INTEGER DEFAULT 0,thumbnail TEXT )',showErr);
     /* 카테고리 테이블 생성*/
     db.run('CREATE TABLE IF NOT EXISTS shoustore_category( category_name TEXT PRIMARY KEY )',showErr);
     db.close(showErr);
@@ -48,18 +49,33 @@ exports.addCategory = ( category_name ) => {
     db.run('INSERT INTO shoustore_category VALUES ("' + category_name + '")',showErr);
 }
 
-exports.addItem = ( name,category_name,stockcnt = 1 ) => {
+exports.addItem = ( name,category_name,price,stockcnt,thumbnail,itemdesc ) => {
     let db = new sqlite3.Database(shoustore_db,showErr);
     let column = 'name,category_name';
     let value = '"' + name + '","' + category_name + '"';
+
+    if( price ){
+        column = column + ',price';
+        value = value + ',' + price;
+    }
 
     if( stockcnt ){
         column = column + ',stockcnt';
         value = value + ',' + stockcnt;
     }
 
+    if( thumbnail ){
+        column = column + ',thumbnail';
+        value = value + ',"' + thumbnail + '"';
+    }
+
+    if( itemdesc ){
+        column = column + ',itemdesc';
+        value = value + ',"' + itemdesc + '"';
+    }
+
     let query = 'INSERT INTO shoustore_item (' + column + ') VALUES(' + value + ')';
-    db.run(query);
+    db.run(query,showErr);
 }
 
 exports.findCategories = async() => {

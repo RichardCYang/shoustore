@@ -9,3 +9,9 @@
 .clickable {
     cursor: pointer;
 }
+
+.infobox_item {
+    position: relative;
+    height: 100%;
+    padding-left: 25px;
+}

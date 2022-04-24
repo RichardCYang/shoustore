@@ -1,4 +1,9 @@
 
+p {
+    margin-block-end: 0em;
+    margin-block-start: 0em;
+}
+
 .oopsimg {
     background-image: url('../icons/oppsicon.svg');
     background-size: cover;
@@ -7,4 +12,52 @@
     height: 420px;
     left: calc(50% - 210px);
     top: calc(50% - 210px);
+}
+
+.itemlinecontainer {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    gap: 5px;
+    grid-template-columns: 1fr 1fr;
+    overflow-x: hidden;
+}
+
+.itemline {
+    position: relative;
+    width: 100%;
+    height: 100px;
+    background: white;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    box-shadow: 2px 2px 4px #b5b5b5;
+    overflow: hidden;
+}
+
+.itemsubbox {
+    width: calc(100% - 100px);
+    left: 100px;
+}
+
+.thumbview {
+    position: absolute;
+    width: 100px;
+    height: 100%;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+.itemtext_name {
+    margin-block-start: 10px;
+    font-family: pto_reg;
+    font-size: 15pt;
+    color: #898989;
+}
+
+.itemtext_desc {
+    margin-block-start: 5px;
+    font-family: nanum_barun_gothic_yethangul;
+    font-size: 10pt;
+    color: #898989;
 }

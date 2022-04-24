@@ -25,9 +25,12 @@ dbmng.addCategory("Cars");
 dbmng.addCategory("Pets");
 dbmng.addCategory("Sports");
 dbmng.addCategory("Outdoor");
+dbmng.addCategory("Furniture");
 /* 상품 임시로 추가 */
-dbmng.addItem('Classic Radio','Electronics');
-dbmng.addItem('Supermicro Server','Electronics');
+dbmng.addItem('Classic Radio','Electronics',85000,1,'img1.jpg','An Old Classical Radio');
+dbmng.addItem('Supermicro Server','Electronics',450000,1,'img3.jpg','Supermicro Server Computer');
+dbmng.addItem('Red Necktie','Clothes',12000,1,'img11.jpg','A Simple Red Necktie');
+dbmng.addItem('Office Chair','Furniture',125000,1,'img7.jpg','This is a chair whice usable in the office'); 
 
 conlog.confin("Initializing database");
 
@@ -136,6 +139,20 @@ webSocketServer.on('connection',(ws,req) => {
             }
             if( data.id.search(/\b(union|select|from|where|or|and|null|is)\b/gi) > -1 ){
                 return;
+            }
+        }
+        /* 아이템 썸네일 이미지 요청을 받았을 때 */
+        if( data.ac === 'getitemthumb' ){
+            if( !data.thumbname ){
+                ws.send('ERR_THUMBGENERAL');
+                return;
+            }
+            try{
+                let imgdata = fs.readFileSync('./server/imgs/' + data.thumbname,{encoding:'base64'});
+                ws.send( imgdata );
+            }catch(err){
+                ws.send('ERR_THUMBGENERAL')
+                console.log(err);
             }
         }
         /* 카테고리에 해당하는 아이템 정보들 검색 요청을 받았을 때 */

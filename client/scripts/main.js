@@ -32,6 +32,9 @@ window.startSessionTimer = (time) => {
         timerDisplay.innerHTML = min + ":" + sec;
 
         if( window.curSessionTime == 0 ){
+            /* 로그아웃 */
+            signout();
+            /* 세션 타이머 종료 */
             clearInterval(window.sessionTimer);
         }
     },1000);
