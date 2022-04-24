@@ -37,6 +37,11 @@ window.onload = () => {
                 websock.close();
                 return;
             }
+            if( event.data === 'ERR_MISMATCHPASSWD' ){
+                window.parent.document.showMessageBox( '비밀번호 오류','비밀번호가 일치하지 않습니다!','error');
+                websock.close();
+                return;
+            }
             /* 로그인이 성공하였을 때, 새로 발급된 세션 값을 받아옴 */
             if( event.data.indexOf("session?") > -1 ){
                 /* 로그인 성공 시, 성공 메세지 띄우기 */

@@ -92,11 +92,11 @@ exports.findItemsByCategory = async( category_name ) => {
 
 exports.findMemberByID = async( nickname, phoneNo ) => {
     /* 회원 테이블 조회 */
-    let query = 'SELECT nickname FROM shoustore_member WHERE nickname = "' + nickname + '"';
+    let query = 'SELECT * FROM shoustore_member WHERE nickname = "' + nickname + '"';
     /* 전화번호 인자값이 전달되었다면? */
     /* => 전화번호도 같이 조회 */
     if( phoneNo ){
-        query = 'SELECT nickname,phone FROM shoustore_member WHERE nickname = "' + nickname + '" and phone = "' + phoneNo +'"';
+        query = 'SELECT * FROM shoustore_member WHERE nickname = "' + nickname + '" and phone = "' + phoneNo +'"';
     }
     return await selectSync(query);
 }
