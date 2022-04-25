@@ -138,3 +138,41 @@ menu > div > button:hover {
     width: 100%;
     height: 800px;
 }
+
+.userbox {
+    display: none;
+    position: absolute;
+    top: 35px;
+    left: -55px;
+    width: 240px;
+    height: 128px;
+    z-index: 128;
+    background: white;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    box-shadow: 2px 2px 4px #b5b5b5;
+    overflow: hidden;
+}
+
+.userbox > div {
+    position: relative;
+    width: 100%;
+    height: 32px;
+    top: calc(100% - 32px);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.userbox_buttons > button {
+    display: block;
+    background: rgb(255,208,103);
+    border: none;
+    font-family: 'pto_reg';
+    color: #898989;
+    /*font-family: nanum_barun_gothic_yethangul;*/
+    font-size: 10pt;
+}
+
+.userbox_buttons > button:hover {
+    background: rgb(255, 187, 39);
+}

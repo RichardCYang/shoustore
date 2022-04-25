@@ -1,17 +1,21 @@
 
 window.updateSession = (data) => {
-    let usermenu_1 = document.getElementById('userdiv_menu1');
-    let usermenu_2 = document.getElementById('userdiv_menu2');
+    let menu = document.getElementById('userdiv'); 
+    let menus = menu.children;
+    if( menus.length < 4 ){
+        return;
+    }
 
     if( data.shoustore_username ){
-        usermenu_2.innerHTML = data.shoustore_username + ', Welcome to our site ';
-        usermenu_1.innerHTML = 'Sign out';
-        usermenu_1.onclick = onSignOut_clicked;
-        usermenu_2.onclick = null;
+        menus[0].style.visibility = 'hidden';
+        menus[1].style.visibility = 'hidden';
+        menus[2].style.display = '';
+        menus[2].innerHTML = data.shoustore_username + '';
     }else{
-        usermenu_1.innerHTML = 'Sign in';
-        usermenu_1.onclick = onSignIn_clicked;
-        usermenu_2.onclick = onSignUp_clicked;
+        menus[0].style.visibility = '';
+        menus[1].style.visibility = '';
+        menus[2].style.display = 'none';
+        menus[1].onclick = onSignUp_clicked;
     }
 }
 
@@ -19,7 +23,6 @@ window.startSessionTimer = (time) => {
     this.curSessionTime = time * 60;
     
     let userdiv = document.getElementById('userdiv'); 
-    let timerDisplay = document.createElement('button');
     let min = 0;
     let sec = 0;
 
@@ -29,7 +32,6 @@ window.startSessionTimer = (time) => {
         window.curSessionTime = window.curSessionTime - 1;
         min = Math.round( window.curSessionTime / 60 );
         sec = Math.round( window.curSessionTime % 60 );
-        timerDisplay.innerHTML = min + ":" + sec;
 
         if( window.curSessionTime == 0 ){
             /* 로그아웃 */
@@ -108,4 +110,11 @@ function onSignUp_clicked(){
 function onGoHome_clicked(){
     let main = document.getElementById('mainContainer');
     main.src = './mainview.html';
+}
+
+function onUserBox_hovered(){
+    let userbox =  document.getElementsByClassName('userbox');
+    for(let i = 0; i < userbox.length; i++){
+        userbox[i].style.display = 'block';
+    }
 }

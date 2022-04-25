@@ -22,10 +22,17 @@
             <button></button>
         </div>
         <div id="userdiv">
-            <button id="userdiv_menu1" class="unselectable" onclick="onSignIn_clicked()">Sign in</button>
-            <button id="userdiv_menu2" class="unselectable" onclick="onSignUp_clicked()">Sign up</button>
-            <button id="userdiv_menu3" class="unselectable">Help</button>
-        </div> 
+            <button class="unselectable" onclick="onSignIn_clicked()">Sign in</button>
+            <button class="unselectable" onclick="onSignUp_clicked()">Sign up</button>
+            <button class="unselectable" onmouseenter="onUserBox_hovered()">Username</button>
+            <button class="unselectable">Help</button>
+            <div class="userbox" onmouseleave="this.style.display = 'none';">
+                <div class="userbox_buttons">
+                    <button onclick="onSignOut_clicked()">Sign out</button>
+                    <button>My profile</button>
+                </div>
+            </div>
+        </div>
     </nav>
     <menu>
         <div id="categories">
