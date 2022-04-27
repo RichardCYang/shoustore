@@ -2,6 +2,7 @@
 const sqlite3 = require('sqlite3').verbose();
 const shoustore_db = "./server/shoustore.db";
 const conlog = require('./consolelog');
+const filemanager = require('./filemanager');
 
 function showErr( err ){
     if( err ){
@@ -88,6 +89,25 @@ exports.findItemsByCategory = async( category_name ) => {
     /* 특정 카테고리에 해당하는 테이블 조회 */
     let query = 'SELECT * FROM shoustore_item WHERE category_name = "' + category_name + '"';
     return await selectSync( query );
+}
+
+exports.findRecentlyItemFromCategories = async() => {
+    /* 각각의 카테고리에서 가장 최신의 상품을 조회 */
+    let cats = await this.findCategories();
+    let items = [];
+    for(let i = 0; i < cats.length; i++){
+        let query = 'SELECT * FROM shoustore_item WHERE category_name = "' + cats[i].category_name + '"';
+        let result = await selectSync( query );
+        if( result.length > 0 ){
+            /* 썸네일 정보를 같이 저장해서 전송 */
+            if( result[0].thumbnail ){
+                let imgdata = filemanager.loadImage( result[0].thumbnail );
+                result[0].rawthumbnail = imgdata;
+            }
+            items.push( result[0] );
+        }
+    }
+    return items;
 }
 
 exports.findMemberByID = async( nickname, phoneNo ) => {

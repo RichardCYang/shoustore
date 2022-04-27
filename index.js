@@ -8,6 +8,7 @@ const fs = require('fs');
 const ws = require('ws');
 const dbmng = require('./server/dbmanager');
 const sessionmng = require('./server/sessionmanager');
+const filemanager = require('./server/filemanager');
 
 conlog.confin('Importing modules');
 
@@ -148,12 +149,20 @@ webSocketServer.on('connection',(ws,req) => {
                 return;
             }
             try{
-                let imgdata = fs.readFileSync('./server/imgs/' + data.thumbname,{encoding:'base64'});
+                let imgdata = filemanager.loadImage( data.thumbname );
                 ws.send( imgdata );
             }catch(err){
                 ws.send('ERR_THUMBGENERAL')
                 console.log(err);
             }
+        }
+        /* 카테고리별 최신 아이템 정보들 검색 요청을 받았을 때 */
+        if( data.ac === 'getrecntcats' ){
+            dbmng.findRecentlyItemFromCategories().then((rows) => {
+                ws.send( JSON.stringify(rows) );
+            }).catch((err) => {
+                console.log(err);
+            });
         }
         /* 카테고리에 해당하는 아이템 정보들 검색 요청을 받았을 때 */
         if( data.ac === 'getcatitems' ){
