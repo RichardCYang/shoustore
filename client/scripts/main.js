@@ -1,7 +1,8 @@
 
 window.updateSession = (data) => {
-    let menu = document.getElementById('userdiv'); 
-    let menus = menu.children;
+    let menu        =   document.getElementById('userdiv'); 
+    let nameText    =   document.getElementById('username_text');
+    let menus       =   menu.children;
     if( menus.length < 4 ){
         return;
     }
@@ -11,6 +12,7 @@ window.updateSession = (data) => {
         menus[1].style.visibility = 'hidden';
         menus[2].style.display = '';
         menus[2].innerHTML = data.shoustore_username + '';
+        nameText.innerHTML = data.shoustore_username + '';
     }else{
         menus[0].style.visibility = '';
         menus[1].style.visibility = '';
@@ -22,16 +24,16 @@ window.updateSession = (data) => {
 window.startSessionTimer = (time) => {
     this.curSessionTime = time * 60;
     
-    let userdiv = document.getElementById('userdiv'); 
+    let timerDisplay = document.getElementById('sessiontimer_text'); 
     let min = 0;
     let sec = 0;
-
-    userdiv.appendChild( timerDisplay );
 
     this.sessionTimer = setInterval(() => {
         window.curSessionTime = window.curSessionTime - 1;
         min = Math.round( window.curSessionTime / 60 );
         sec = Math.round( window.curSessionTime % 60 );
+
+        timerDisplay.innerHTML = 'Expired : ' + min + ':' + sec;
 
         if( window.curSessionTime == 0 ){
             /* 로그아웃 */

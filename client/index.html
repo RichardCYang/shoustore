@@ -27,6 +27,9 @@
             <button class="unselectable" onmouseenter="onUserBox_hovered()">Username</button>
             <button class="unselectable">Help</button>
             <div class="userbox" onmouseleave="this.style.display = 'none';">
+                <p id="username_text"></p>
+                <hr>
+                <p id="sessiontimer_text">Expired : 00:00</p>
                 <div class="userbox_buttons">
                     <button onclick="onSignOut_clicked()">Sign out</button>
                     <button>My profile</button>
