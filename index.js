@@ -142,99 +142,11 @@ webSocketServer.on('connection',(ws,req) => {
                 return;
             }
         }
-        /* 상품을 이름별로 검색 요청을 받았을 때 */
-        if( data.ac === 'searchitem' ){
-            dbmng.findItemsByName( data.itemname ).then((rows) => {
-                ws.send( JSON.stringify( rows ) );
-            }).catch((err) => {
-                console.log( err );
-            })
-        } 
-        /* 아이템 썸네일 이미지 요청을 받았을 때 */
-        if( data.ac === 'getitemthumb' ){
-            if( !data.thumbname ){
-                ws.send('ERR_THUMBGENERAL');
-                return;
-            }
-            try{
-                let imgdata = filemanager.loadImage( data.thumbname );
-                ws.send( imgdata );
-            }catch(err){
-                ws.send('ERR_THUMBGENERAL')
-                console.log(err);
-            }
-        }
-        /* 카테고리별 최신 아이템 정보들 검색 요청을 받았을 때 */
-        if( data.ac === 'getrecntcats' ){
-            dbmng.findRecentlyItemFromCategories().then((rows) => {
-                ws.send( JSON.stringify(rows) );
-            }).catch((err) => {
-                console.log(err);
-            });
-        }
-        /* 카테고리에 해당하는 아이템 정보들 검색 요청을 받았을 때 */
-        if( data.ac === 'getcatitems' ){
-            dbmng.findItemsByCategory( data.cat ).then((rows) => {
-                ws.send( JSON.stringify(rows) );
-            }).catch((err) => {
-                console.log(err);
-            });
-        }
-        /* 서버에 등록되어있는 카테고리 정보 불러오는 요청을 받았을 때 */
-        if( data.ac === 'getcats' ){
-            /* 카테고리 정보 조회 */
-            dbmng.findCategories().then((rows) => {
-                ws.send( JSON.stringify( rows ) );
-            }).catch((err) => {
-                console.log(err);
-            });
-        }
-        /* 로그아웃 요청을 받았을 때 */
-        if( data.ac === 'signout' ){
-            /* 해당 키값에 해당하는 세션 제거 */
-            sessionmng.destroySession( data.key );
-            ws.send('DONE_DESTROYSESSION');
-        }
-        /* 로그인 요청을 받았을 때 */
-        if( data.ac === 'signin' ){
-            dbmng.findMemberByID( data.id ).then((rows) => {
-                if( rows.length == 0 ){
-                    ws.send('ERR_NOMEMBER');
-                }else{
-                    if( rows[0].password !== data.pw ){
-                        ws.send('ERR_MISMATCHPASSWD');
-                        return;
-                    }
-                    /* 새로운 세션 생성 */
-                    let session = sessionmng.createSession( data.id );
-                    /* 로그인 성공 시, 계정에 대한 세션 정보 전송 -> 클라이언트 */
-                    ws.send('session?id=' + session.id + '&expired=' + session.expired + '&username=' + session.username);
-                }
-            }).catch((err) => {
-                console.log(err);
-            })
-        }
-        /* 회원가입 요청을 받았을 때 */
-        if( data.ac === 'signup' ){
-            dbmng.findMemberByID( data.id, data.phone ).then((rows) => {
-                /* 해당 유저가 이미 가입되어 있다면 */
-                rows.forEach((row) => {
-                    if( row.nickname === data.id  ){
-                        ws.send("ERR_ALREADYREGMEMBER");
-                        return;
-                    }
-                })
-                /* 신규 유저라면 새로운 튜플을 데이터베이스에 추가 */
-                dbmng.regMember( data.id,data.pw,data.phone,(err) => {
-                    if( err ){
-                        console.log( err );
-                        return;
-                    }
-                    ws.send('DONE_REGMEMBER');
-                });
-            }).catch((err) => {
-                console.log(err);
-            });
+        try{
+            let m = require('./server/actions/' + data.ac);
+            m[ data.ac ]( ws,data );
+        }catch(err){
+            console.log(err);
         }
     });
 });
