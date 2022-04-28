@@ -93,7 +93,7 @@ exports.findItemsByCategory = async( category_name ) => {
 
 exports.findItemsByName = async( itemname ) => {
     /* 상품 이름으로 조회 */
-    let query = 'SELECT * FROM shoustore_item WHERE name LIKE "%' + itemname + '%"';
+    let query = 'SELECT * FROM shoustore_item WHERE LOWER(name) LIKE "%" || LOWER("' + itemname + '") || "%"';
     return await selectSync( query );
 }
 
