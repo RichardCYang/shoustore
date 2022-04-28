@@ -46,7 +46,6 @@ window.startSessionTimer = (time) => {
 
 function loadCategories(){
     let catroot = document.getElementById('categories');
-    let main = document.getElementById('mainContainer');
     let websock = new WebSocketClient;
     websock.open();
     websock.onOpen((event) => {
@@ -58,7 +57,7 @@ function loadCategories(){
             let btn = document.createElementWithAttrib('button',{'class':'unselectable'});
             btn.innerHTML = row.category_name + '';
             btn.onclick = () => {
-                main.src = './boardview.html?cat=' + row.category_name;
+                mainView.src = './boardview.html?ac=catlist&cat=' + row.category_name;
             }
             catroot.appendChild(btn);
         });
@@ -73,6 +72,7 @@ window.onload = function(){
         return;
     }
     window.mainPopup = new Popup;
+    window.mainView = document.getElementById('mainContainer');
 
     updateSession( localStorage );
     loadCategories();
@@ -110,8 +110,7 @@ function onSignUp_clicked(){
 }
 
 function onGoHome_clicked(){
-    let main = document.getElementById('mainContainer');
-    main.src = './mainview.html';
+    mainView.src = './mainview.html';
 }
 
 function onUserBox_hovered(){
@@ -119,4 +118,20 @@ function onUserBox_hovered(){
     for(let i = 0; i < userbox.length; i++){
         userbox[i].style.display = 'block';
     }
+}
+
+function onSearchBox_entered( input ){
+    if( checkNullOrEmpty( input ) ){
+        return;
+    }
+    let websock = new WebSocketClient;
+    websock.open();
+    websock.onOpen((event) => {
+        websock.send('ac=searchitem\n' + 'itemname=' + input);
+    });
+    websock.onReply((event) => {
+        mainView.src = './boardview.html?ac=searchlist';
+        localStorage.setItem('boardview_searchitems',event.data);
+        websock.close();
+    })
 }

@@ -91,6 +91,12 @@ exports.findItemsByCategory = async( category_name ) => {
     return await selectSync( query );
 }
 
+exports.findItemsByName = async( itemname ) => {
+    /* 상품 이름으로 조회 */
+    let query = 'SELECT * FROM shoustore_item WHERE name LIKE "%' + itemname + '%"';
+    return await selectSync( query );
+}
+
 exports.findRecentlyItemFromCategories = async() => {
     /* 각각의 카테고리에서 가장 최신의 상품을 조회 */
     let cats = await this.findCategories();

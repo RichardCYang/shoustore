@@ -142,6 +142,14 @@ webSocketServer.on('connection',(ws,req) => {
                 return;
             }
         }
+        /* 상품을 이름별로 검색 요청을 받았을 때 */
+        if( data.ac === 'searchitem' ){
+            dbmng.findItemsByName( data.itemname ).then((rows) => {
+                ws.send( JSON.stringify( rows ) );
+            }).catch((err) => {
+                console.log( err );
+            })
+        } 
         /* 아이템 썸네일 이미지 요청을 받았을 때 */
         if( data.ac === 'getitemthumb' ){
             if( !data.thumbname ){
