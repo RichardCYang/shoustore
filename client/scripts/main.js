@@ -11,8 +11,8 @@ window.updateSession = (data) => {
         menus[0].style.visibility = 'hidden';
         menus[1].style.visibility = 'hidden';
         menus[2].style.display = '';
-        menus[2].innerHTML = data.shoustore_username + '';
-        nameText.innerHTML = data.shoustore_username + '';
+        menus[2].textContent = data.shoustore_username + '';
+        nameText.textContent = data.shoustore_username + '';
     }else{
         menus[0].style.visibility = '';
         menus[1].style.visibility = '';
@@ -33,7 +33,7 @@ window.startSessionTimer = (time) => {
         min = Math.round( window.curSessionTime / 60 );
         sec = Math.round( window.curSessionTime % 60 );
 
-        timerDisplay.innerHTML = 'Expired : ' + min + ':' + sec;
+        timerDisplay.textContent = 'Expired : ' + min + ':' + sec;
 
         if( window.curSessionTime == 0 ){
             /* 로그아웃 */
@@ -55,7 +55,7 @@ function loadCategories(){
         let cats = JSON.parse( event.data );
         cats.forEach( row => {
             let btn = document.createElementWithAttrib('button',{'class':'unselectable'});
-            btn.innerHTML = row.category_name + '';
+            btn.textContent = row.category_name + '';
             btn.onclick = () => {
                 mainView.src = './boardview.html?ac=catlist&cat=' + row.category_name;
             }
@@ -66,11 +66,6 @@ function loadCategories(){
 }
 
 window.onload = function(){
-    if( document.checkBrowser() == document.BROWSER_IE || document.checkBrowser() == document.BROWSER_IE11 ){
-        alert("IE는 지원하지 않아요...");
-        document.body.innerHTML = "";
-        return;
-    }
     window.mainPopup = new Popup;
     window.mainView = document.getElementById('mainContainer');
 

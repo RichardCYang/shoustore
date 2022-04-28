@@ -19,8 +19,8 @@ function loadPage( input ){
             let nameText = document.createElementWithAttrib('p',{'class':'itemtext_name'});
             let descText = document.createElementWithAttrib('p',{'class':'itemtext_desc'});
 
-            nameText.innerHTML = item.name + '';
-            descText.innerHTML = item.itemdesc + '';
+            nameText.textContent = item.name + '';
+            descText.textContent = item.itemdesc + '';
             
             /* 이미지 데이터를 얻어오기 위해 웹소켓 재호출 */
             if( item.thumbnail ){
