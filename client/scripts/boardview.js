@@ -24,19 +24,14 @@ function loadPage( input ){
             
             /* 이미지 데이터를 얻어오기 위해 웹소켓 재호출 */
             if( item.thumbnail ){
-                let thumbsock = new WebSocketClient;
-                thumbsock.open(); 
-                thumbsock.onOpen((event) => {
-                    thumbsock.send('ac=getitemthumb\nthumbname=' + item.thumbnail);
-                });
-                thumbsock.onReply((event) => {
+                wsc_simplesend('ac=getitemthumb\nthumbname=' + item.thumbnail,(event) => {
                     if( event.data === 'ERR_THUMBGENERAL' ){
                         thumbsock.close();
                         return;
                     }
 
                     thumbView.src = 'data:image/jpg;base64,' +  event.data;
-                })
+                });
             }
             infoBox.appendChild( nameText );
             infoBox.appendChild( descText );
@@ -60,17 +55,12 @@ window.onload = () => {
             localStorage.removeItem('boardview_searchitems');
         }
         if( params.ac === 'catlist' ){
-            let websock = new WebSocketClient;
-            websock.open();
-            websock.onOpen((event) => {
-                websock.send('ac=getcatitems\ncat=' + params.cat);
-            });
-            websock.onReply((event) => {
+            wsc_simplesend('ac=getcatitems\ncat=' + params.cat,(event) => {
                 /* 기존 소켓 연결 종료 */
                 websock.close();
                 /* 페이지 생성 */
                 loadPage( event.data );
-            })
+            });
         }
     }
 }

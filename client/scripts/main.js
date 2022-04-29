@@ -46,12 +46,7 @@ window.startSessionTimer = (time) => {
 
 function loadCategories(){
     let catroot = document.getElementById('categories');
-    let websock = new WebSocketClient;
-    websock.open();
-    websock.onOpen((event) => {
-        websock.send('ac=getcats');
-    });
-    websock.onReply((event) => {
+    wsc_simplesend('ac=getcats',(event) => {
         let cats = JSON.parse( event.data );
         cats.forEach( row => {
             let btn = document.createElementWithAttrib('button',{'class':'unselectable'});
@@ -61,7 +56,6 @@ function loadCategories(){
             }
             catroot.appendChild(btn);
         });
-        websock.close();
     });
 }
 
@@ -74,20 +68,15 @@ window.onload = function(){
 }
 
 function signout(){
-    let websock = new WebSocket("ws://localhost:8090");
-    websock.onopen = (event) => {
-        websock.send('ac=signout\n' + 'key=' + localStorage.getItem('shoustore_key'));
-    };
-    websock.onmessage = (event) => {
+    wsc_simplesend('ac=signout\n' + 'key=' + localStorage.getItem('shoustore_key'),(event) => {
         if( event.data == 'DONE_DESTROYSESSION' ){
             /* 클라이언트 세션 정보 삭제 */
             localStorage.clear();
             document.showMessageBox( '로그아웃 알림','로그아웃 되었습니다!','info' ).then(() => {
                 window.location.reload();
             });
-            websock.close();
         }
-    }
+    });
 }
 
 function onSignOut_clicked(){
@@ -119,14 +108,8 @@ function onSearchBox_entered( input ){
     if( checkNullOrEmpty( input ) ){
         return;
     }
-    let websock = new WebSocketClient;
-    websock.open();
-    websock.onOpen((event) => {
-        websock.send('ac=searchitem\n' + 'itemname=' + input);
-    });
-    websock.onReply((event) => {
+    wsc_simplesend('ac=searchitem\n' + 'itemname=' + input,(event) => {
         mainView.src = './boardview.html?ac=searchlist';
         localStorage.setItem('boardview_searchitems',event.data);
-        websock.close();
-    })
+    });
 }

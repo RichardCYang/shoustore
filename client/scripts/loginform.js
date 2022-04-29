@@ -23,23 +23,13 @@ window.onload = () => {
             return;
         }
 
-        let websock = new WebSocket('ws://localhost:8090');
-
-        websock.onopen = (event) => {
-            websock.send('ac=signin\n' + 
-                         'id=' + nicknameView.value + '\n' +
-                         'pw=' + sha256(passwdView.value) );
-        };
-
-        websock.onmessage = (event) => {
+        wsc_simplesend('ac=signin\n' + 'id=' + nicknameView.value + '\n' + 'pw=' + sha256(passwdView.value),(event) => {
             if( event.data === 'ERR_NOMEMBER' ){
                 window.parent.document.showMessageBox( '등록되지 않은 사용자','등록된 사용자가 아닙니다!','info' );
-                websock.close();
                 return;
             }
             if( event.data === 'ERR_MISMATCHPASSWD' ){
                 window.parent.document.showMessageBox( '비밀번호 오류','비밀번호가 일치하지 않습니다!','error');
-                websock.close();
                 return;
             }
             /* 로그인이 성공하였을 때, 새로 발급된 세션 값을 받아옴 */
@@ -66,12 +56,11 @@ window.onload = () => {
                     let time = parseInt( expired );
                     window.parent.startSessionTimer( expired );
                 }
-
-                websock.close();
+                
                 /* 로그인 팝업창 닫기 */
                 window.parent.document.getElementsByClassName('popupClose')[0].click();
             }
-        }
+        });
     });
 
     document.setOnClickByID('regButton',() => {

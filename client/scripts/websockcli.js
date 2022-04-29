@@ -35,3 +35,15 @@ class WebSocketClient {
         this.sock = new WebSocket("ws://localhost:" + this.port);
     }
 }
+
+function wsc_simplesend( data,onreply ){
+    let websock = new WebSocketClient;
+    websock.open();
+    websock.onOpen((event) => {
+        websock.send( data );
+    })
+    websock.onReply((event) => {
+        websock.close();
+        onreply(event);
+    });
+}

@@ -66,28 +66,17 @@ window.onload = () => {
             window.parent.document.showMessageBox( '잘못된 입력','비밀번호가 일치하지 않습니다!','error' );
             return;
         }
-    
-        let websock = new WebSocket('ws://localhost:8090');
-    
-        websock.onopen = (event) => {
-            websock.send('ac=signup\n' + 
-                            'id=' + nicknameView.value + '\n' +
-                            'pw=' + sha256(passwdView.value) + '\n' +
-                            'phone=' + phoneNoView.value );
-        }
-    
-        websock.onmessage = (event) => {
+
+        wsc_simplesend('ac=signup\n' + 'id=' + nicknameView.value + '\n' + 'pw=' + sha256(passwdView.value) + '\n' + 'phone=' + phoneNoView.value,(event) => {
             if( event.data === "ERR_ALREADYREGMEMBER" ){
                 window.parent.document.showMessageBox( '회원가입 실패','이미 존재하는 아이디 입니다!','error' );
-                websock.close();
                 return;
             }
             
             if( event.data === "DONE_REGMEMBER" ){
                 window.parent.document.showMessageBox( '회원가입 성공','회원가입이 성공적으로 완료되었습니다!','info' );
-                websock.close();
                 return;
             }
-        }
+        })
     })
 }
