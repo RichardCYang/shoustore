@@ -18,3 +18,8 @@
     font-family:nanum_barun_gothic_yethangul;
     src: url(../fonts/NanumBarunGothic-YetHangul.ttf);
 }
+
+@font-face {
+    font-family:nanum_yebbeun_mingyeong;
+    src: url(../fonts/NanumYeBbeunMinGyeongCe.ttf);
+}

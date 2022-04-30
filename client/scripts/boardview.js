@@ -56,8 +56,6 @@ window.onload = () => {
         }
         if( params.ac === 'catlist' ){
             wsc_simplesend('ac=getcatitems\ncat=' + params.cat,(event) => {
-                /* 기존 소켓 연결 종료 */
-                websock.close();
                 /* 페이지 생성 */
                 loadPage( event.data );
             });

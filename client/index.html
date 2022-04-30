@@ -19,7 +19,7 @@
     <nav>
         <h1 class="unselectable clickable" onclick="onGoHome_clicked()">Share Houstore</h1>
         <div id="searchdiv">
-            <input type="text" onkeydown="if( arguments[0].keyCode === 13 ){ onSearchBox_entered( this.value ); }"/>
+            <input type="text" onkeydown="if( arguments[0].keyCode === 13 ){ onSearchBox_entered( this.value ); this.value = ''; }"/>
             <button></button>
         </div>
         <div id="userdiv">

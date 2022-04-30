@@ -1,6 +1,7 @@
 
 body {
     margin: 0px;
+    overflow: hidden;
 }
 
 #itemprevcontainer {
@@ -19,6 +20,37 @@ body {
     width: 100%;
     height: 10%;
     background: #c1c1c1;
+}
+
+#maindownbanner > div {
+    position: relative;
+    left: calc(50% - 40%);
+    top: calc(50% - 40%);
+    width: 80%;
+    height: 80%;
+    text-align: center;
+}
+
+#maindownbanner > div > div {
+    height: 100%;
+    width: 70px;
+    display: inline-block;
+}
+
+#maindownbanner > div > div > img {
+    position: relative;
+    height: 80%;
+    text-align: center;
+}
+
+#maindownbanner > div > div > p {
+    position: relative;
+    margin-block-start: 0em;
+    margin-block-end: 0em;
+    font-family: nanum_yebbeun_mingyeong;
+    font-size: 15pt;
+    color: #515151;
+    top: -15%;
 }
 
 .itemview {
