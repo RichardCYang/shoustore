@@ -59,19 +59,49 @@ function loadCategories(){
     });
 }
 
+window.onstorage = (event) => {
+    if(!event.newValue){
+        return;
+    }
+    if(event.key == 'shoustore_key'){
+        localStorage.setItem('sessionStorage',JSON.stringify(sessionStorage));
+        localStorage.removeItem('sessionStorage');  
+    }else if(event.key == 'sessionStorage' && !sessionStorage.length){
+        let data = JSON.parse(event.newValue);
+        for(let key in data){
+            sessionStorage.setItem(key,data[key]);
+        }
+    }
+}
+
+if( !sessionStorage.length ){
+    localStorage.setItem('shoustore_key','TEMP_KEY');
+    localStorage.removeItem('shoustore_key');
+}
+
 window.onload = function(){
     window.mainPopup = new Popup;
     window.mainView = document.getElementById('mainContainer');
 
-    updateSession( localStorage );
+    if( sessionStorage.shoustore_key == 'EXP_KEY' ){
+        sessionStorage.clear();
+    }
+
+    updateSession( sessionStorage );
     loadCategories();
 }
 
 function signout(){
-    wsc_simplesend('ac=signout\n' + 'key=' + localStorage.getItem('shoustore_key'),(event) => {
+    wsc_simplesend('ac=signout\n' + 'key=' + sessionStorage.getItem('shoustore_key'),(event) => {
+        if( event.data == 'ERR_ALREADYLOGGEDOUT' ){
+            document.showMessageBox( '로그아웃 알림','이미 로그아웃 되었습니다!','warning' );
+            sessionStorage.clear();
+            updateSession( sessionStorage );
+            return;
+        }
         if( event.data == 'DONE_DESTROYSESSION' ){
             /* 클라이언트 세션 정보 삭제 */
-            localStorage.clear();
+            sessionStorage.setItem('shoustore_key','EXP_KEY');
             document.showMessageBox( '로그아웃 알림','로그아웃 되었습니다!','info' ).then(() => {
                 window.location.reload();
             });

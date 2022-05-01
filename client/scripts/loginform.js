@@ -45,11 +45,11 @@ window.onload = () => {
                 let expired = parseData[1].split(/expired=(.*?)/g)[2];
                 let username = parseData[2].split(/username=(.*?)/g)[2];
 
-                localStorage.setItem('shoustore_key',id);
-                localStorage.setItem('shoustore_expired',expired);
-                localStorage.setItem('shoustore_username',username);
+                sessionStorage.setItem('shoustore_key',id);
+                sessionStorage.setItem('shoustore_expired',expired);
+                sessionStorage.setItem('shoustore_username',username);
 
-                window.parent.updateSession( localStorage );
+                window.parent.updateSession( sessionStorage );
 
                 /* 세션 타이머 시작 */
                 if( window.parent.startSessionTimer ){

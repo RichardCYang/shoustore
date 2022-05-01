@@ -13,7 +13,7 @@ exports.createSession = ( usernick ) => {
 }
 
 exports.getSession = ( id ) => {
-    let curSession;
+    let curSession = null;
     sessions.forEach((session) => {
         if( session.id === id ){
             curSession = session;
