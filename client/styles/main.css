@@ -216,16 +216,6 @@ menu > div > button:hover {
     grid-template-columns: 1fr 1fr;
 }
 
-.userbox_buttons > button {
-    display: block;
-    background: rgb(255,208,103);
-    border: none;
-    font-family: 'busan_font_bold';
-    color: #898989;
-    /*font-family: nanum_barun_gothic_yethangul;*/
-    font-size: 10pt;
-}
-
 .userbox_buttons > button:hover {
     background: rgb(255, 187, 39);
 }

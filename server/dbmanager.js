@@ -39,7 +39,7 @@ exports.createTableNeeded = () => {
     /* 구매 테이블 생성 */
     db.run('CREATE TABLE IF NOT EXISTS shoustore_bought( buyername TEXT PRIMARY KEY,buydate INTEGER NOT NULL,buyitem TEXT NOT NULL,buyamount INTEGER NOT NULL )',showErr);
     /* 상품 테이블 생성 */
-    db.run('CREATE TABLE IF NOT EXISTS shoustore_item( product_id INTEGER PRIMARY KEY AUTOINCREMENT,name TEXT NOT NULL UNIQUE,itemdesc TEXT,stockcnt INTEGER DEFAULT 0,makername TEXT,category_name TEXT NOT NULL,price INTEGER DEFAULT 0,thumbnail TEXT )',showErr);
+    db.run('CREATE TABLE IF NOT EXISTS shoustore_item( product_id INTEGER PRIMARY KEY AUTOINCREMENT,name TEXT NOT NULL,itemdesc TEXT,stockcnt INTEGER DEFAULT 0,makername TEXT,category_name TEXT NOT NULL,price INTEGER DEFAULT 0,thumbnail TEXT )',showErr);
     /* 카테고리 테이블 생성*/
     db.run('CREATE TABLE IF NOT EXISTS shoustore_category( category_name TEXT PRIMARY KEY )',showErr);
     db.close(showErr);
