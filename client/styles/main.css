@@ -110,7 +110,7 @@ footer h2 {
 #userdiv > button {
     background: none;
     border: none;
-    font-family: 'hack_regular';
+    font-family: 'nanum_barun_gothic_yethangul';
     font-size: 10pt;
     color: #7e7e7e;
 }
@@ -134,7 +134,7 @@ menu > div > button:hover {
 
 #userdiv > button:hover {
     color: #ff380b;
-    font-family: 'hack_bold';
+    font-family: 'nanum_barun_gothic_yethangul';
 }
 
 #searchdiv > input {
@@ -220,7 +220,7 @@ menu > div > button:hover {
     display: block;
     background: rgb(255,208,103);
     border: none;
-    font-family: 'pto_reg';
+    font-family: 'busan_font_bold';
     color: #898989;
     /*font-family: nanum_barun_gothic_yethangul;*/
     font-size: 10pt;

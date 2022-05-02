@@ -23,3 +23,13 @@
     font-family:nanum_yebbeun_mingyeong;
     src: url(../fonts/NanumYeBbeunMinGyeongCe.ttf);
 }
+
+@font-face {
+    font-family:nanum_square_bold;
+    src: url(../fonts/NanumSquareB.ttf);
+}
+
+@font-face {
+    font-family:busan_font_bold;
+    src: url(../fonts/BusanFont_Provisional.otf);
+}

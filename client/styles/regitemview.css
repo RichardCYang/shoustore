@@ -1,0 +1,8 @@
+
+.regItemForm {
+    position: absolute;
+    width: 640px;
+    height: 480px;
+    left: calc(50% - 320px);
+    top: 0px;
+}

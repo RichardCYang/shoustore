@@ -22,18 +22,18 @@
             <input type="text" onkeydown="if( arguments[0].keyCode === 13 ){ onSearchBox_entered( this.value ); this.value = ''; }"/>
             <button></button>
         </div>
-        <div id="userdiv">
-            <button class="unselectable" onclick="onSignIn_clicked()">Sign in</button>
-            <button class="unselectable" onclick="onSignUp_clicked()">Sign up</button>
-            <button class="unselectable" onmouseenter="onUserBox_hovered()">Username</button>
-            <button class="unselectable">Help</button>
+        <div id="userdiv" class="unselectable">
+            <button onclick="onSignIn_clicked()">로그인</button>
+            <button onclick="onSignUp_clicked()">회원가입</button>
+            <button onmouseenter="onUserBox_hovered()">Username</button>
+            <button>도움말</button>
             <div class="userbox" onmouseleave="this.style.display = 'none';">
                 <p id="username_text"></p>
                 <hr>
                 <p id="sessiontimer_text">Expired : 00:00</p>
                 <div class="userbox_buttons">
-                    <button onclick="onSignOut_clicked()">Sign out</button>
-                    <button>My profile</button>
+                    <button onclick="onSignOut_clicked()">로그아웃</button>
+                    <button>내 프로필</button>
                 </div>
             </div>
         </div>

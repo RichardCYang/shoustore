@@ -22,3 +22,12 @@ function loadCategories(){
 window.onload = () => {
     loadCategories();
 }
+
+function onRegItem_clicked(){
+    if( !sessionStorage.shoustore_key ){
+        window.parent.document.showMessageBox('로그인 안내','로그인이 필요한 서비스 입니다!','info');
+        return;
+    }
+    
+    window.parent.mainView.src = './regitemview.html';
+}
