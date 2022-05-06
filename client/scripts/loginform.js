@@ -51,11 +51,7 @@ window.onload = () => {
 
                 window.parent.updateSession( sessionStorage );
 
-                /* 세션 타이머 시작 */
-                if( window.parent.startSessionTimer ){
-                    let time = parseInt( expired );
-                    window.parent.startSessionTimer( expired );
-                }
+                window.parent.reload();
                 
                 /* 로그인 팝업창 닫기 */
                 window.parent.document.getElementsByClassName('popupClose')[0].click();

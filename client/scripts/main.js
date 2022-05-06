@@ -87,6 +87,10 @@ window.onload = function(){
         sessionStorage.clear();
     }
 
+    if( sessionStorage.shoustore_expired ){
+        window.startSessionTimer( parseInt( sessionStorage.shoustore_expired ) );
+    }
+    
     updateSession( sessionStorage );
     loadCategories();
 }
