@@ -24,3 +24,44 @@
     color: #898989;
     font-size: 10pt;
 }
+
+.itemcontainer {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-gap: 20px;
+}
+
+.itemview {
+    background: white;
+    margin: 2px;
+    border-radius: 5px;
+    box-shadow: 2px 2px 4px #b5b5b5;
+    height: 256px;
+    border: 1px solid rgb(164, 164, 164);
+}
+
+.itemview > img {
+    position: relative;
+    width: 100%;
+    height: 70%;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+    border-bottom: 1px solid rgb(164, 164, 164);;
+}
+
+.mainarea {
+    position: relative;
+    width: 1024px;
+    height: fit-content;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.mainarea > h3 {
+    font-family: 'nanum_square_bold';
+    color:#aaaaaa;
+    margin-block-end: 0em;
+}

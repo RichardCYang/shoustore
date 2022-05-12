@@ -1,4 +1,17 @@
 
+function genCard( imgcode ){
+    let card;
+    let thumbnail;
+    card = document.createElementWithAttrib('div',{'class':'itemview'});
+    thumbnail = document.createElement('img');
+
+    if( imgcode ){
+        thumbnail.src = 'data:image/jpg;base64,' + imgcode;
+    }
+    
+    card.appendChild(thumbnail);
+    return card;
+}
 function pageToOpps(){
     /* 기존 화면 전부 지움 */
     document.clearBody();
@@ -8,38 +21,36 @@ function pageToOpps(){
 }
 function loadPage( input ){
     let data = JSON.parse( input );
+    let frame = document.createElementWithAttrib('div',{'class':'mainarea'});
+    let cards = document.createElementWithAttrib('div',{'class':'itemcontainer'});
     /* 아이템 개수 만큼 리스트 생성 */
     if( data.length > 0 ){
+        /* 데이터 개수가 5개보다 적을 경우 그리드 첫 번째 줄을 채우지 못해 */
+        /* 가운데 정렬이 제대로 안되므로, 비어있는 그리드 아이템을 더 채워 */
+        /* 첫 번째 줄 아이템을 5개로 맞춤 */
+        if( data.length < 5 ){
+            let diff = 5 - data.length;
+            for(let i = 0; i < diff; i++){
+                data.push({'thumbnail':'NA'});
+            }
+        }
         /* 아이템 정보 리스트 출력 */
-        let container = document.createElementWithAttrib('div',{'class':'itemlinecontainer'});
         data.forEach((item,idx) => {
-            let line = document.createElementWithAttrib('div',{'class':'itemline'});
-            let thumbView = document.createElementWithAttrib('img',{'class':'thumbview'});
-            let infoBox = document.createElementWithAttrib('div',{'class':'infobox_item itemsubbox'});
-            let nameText = document.createElementWithAttrib('p',{'class':'itemtext_name'});
-            let descText = document.createElementWithAttrib('p',{'class':'itemtext_desc'});
-
-            nameText.textContent = item.name + '';
-            descText.textContent = item.itemdesc + '';
-            
             /* 이미지 데이터를 얻어오기 위해 웹소켓 재호출 */
             if( item.thumbnail ){
                 wsc_simplesend('ac=getitemthumb\nthumbname=' + item.thumbnail,(event) => {
                     if( event.data === 'ERR_THUMBGENERAL' ){
-                        thumbsock.close();
+                        let card = genCard( "" );
+                        cards.appendChild( card );
                         return;
                     }
-
-                    thumbView.src = 'data:image/jpg;base64,' +  event.data;
+                    let card = genCard( event.data );
+                    cards.appendChild( card );
                 });
             }
-            infoBox.appendChild( nameText );
-            infoBox.appendChild( descText );
-            line.appendChild( thumbView );
-            line.appendChild( infoBox );
-            container.appendChild( line );
-            document.body.appendChild( container );
         });
+        frame.appendChild(cards);
+        document.body.appendChild(frame);
     }else{
         /* 에러 메세지( Opps ) 출력 */
         pageToOpps();
