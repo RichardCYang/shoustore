@@ -16,17 +16,23 @@
     <title>Share Houstore</title>
 </head>
 <body>
-    <nav>
-        <h1 class="unselectable clickable" onclick="onGoHome_clicked()">Share Houstore</h1>
-        <div id="searchdiv">
-            <input type="text" onkeydown="if( arguments[0].keyCode === 13 ){ onSearchBox_entered( this.value ); this.value = ''; }"/>
-            <button></button>
+    <header>
+        <div class="header_wrapper">
+            <h1 class="unselectable clickable" onclick="onGoHome_clicked()">Share Houstore</h1>
+            <div class="searchdiv">
+                <input type="text" onkeydown="if( arguments[0].keyCode === 13 ){ onSearchBox_entered( this.value ); this.value = ''; }"/>
+                <button></button>
+            </div>
+            <button class="usermenu clickable" onclick="onUserMenu_clicked()"></button>
+            <div class="usermenu_dropdown">
+                <button onclick="onSignIn_clicked()">로그인</button>
+                <button onclick="onSignUp_clicked()">회원가입</button>
+            </div>
         </div>
+    </header>
+    <!--<nav>
         <div id="userdiv" class="unselectable">
-            <button onclick="onSignIn_clicked()">로그인</button>
-            <button onclick="onSignUp_clicked()">회원가입</button>
             <button onmouseenter="onUserBox_hovered()">Username</button>
-            <button>도움말</button>
             <div class="userbox" onmouseleave="this.style.display = 'none';">
                 <p id="username_text"></p>
                 <hr>
@@ -37,11 +43,7 @@
                 </div>
             </div>
         </div>
-    </nav>
-    <menu>
-        <div id="categories">
-        </div>
-    </menu>
+    </nav>-->
     <main>
         <embed id="mainContainer" src="./mainview.html">
     </main>

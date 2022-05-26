@@ -113,6 +113,17 @@ function signout(){
     });
 }
 
+function onUserMenu_clicked(){
+    window.isOpenedUserMenu = !window.isOpenedUserMenu;
+
+    let usermenu = document.querySelector('.usermenu_dropdown');
+    if( window.isOpenedUserMenu ){
+        usermenu.style.display = 'block';
+    }else{
+        usermenu.style.display = 'none';
+    }
+}
+
 function onSignOut_clicked(){
     signout();
 }

@@ -65,3 +65,95 @@
     color:#aaaaaa;
     margin-block-end: 0em;
 }
+
+header {
+    text-align: center;
+    height: 72px;
+    border-bottom: 1px solid #d0d0d0;
+}
+
+.header_wrapper {
+    position: relative;
+    display: inline-block;
+    height: 100%;
+    width: 1024px;
+    z-index: 16;
+}
+
+.header_wrapper > h1 {
+    display: table;
+    margin-block-end: 0em;
+    margin-block-start: 0em;
+    margin: 0em;
+    position: relative;
+    left: 20px;
+    top: calc(50% - 20px);
+    font-family: 'pto_reg';
+    font-size: 22pt;
+    color: rgb(255,208,103);
+}
+
+.searchdiv {
+    position: absolute;
+    width: 360px;
+    height: 24px;
+    left: calc(50% - 180px);
+    top: calc(50% - 12px);
+    display: inline-flex;
+    border: solid 2px rgb(255,208,103);
+}
+
+.searchdiv > input {
+    width: calc(100% - 24px);
+    border: none;
+}
+
+.searchdiv > button {
+    width: 24px;
+    border: none;
+    border-left: 1px solid #e7e7e7;
+    background-color: white;
+    background-image: url(../icons/searchicon.svg);
+    background-size: 90% 90%;
+    background-position: center;
+}
+
+.usermenu {
+    position: absolute;
+    float: right;
+    width: 28px;
+    height: 28px;
+    right: 10px;
+    top: calc(50% - 14px);
+    background: url(../icons/menuicon.svg);
+    background-size: 100% 100%;
+    border: none;
+}
+
+.usermenu_dropdown {
+    position: absolute;
+    left: 880px;
+    top: 48px;
+    width: 128px;
+    height: 64px;
+    display: none;
+}
+
+.usermenu_dropdown > button {
+    position: relative;
+    width: 100%;
+    height: 24px;
+    padding: 0px;
+    display: block;
+    border: none;
+    background: white;
+    box-shadow: 0px 1px 4px rgb(205, 205, 205);
+    font-family: 'nanum_square';
+    color: #707070;
+    line-height: 1em;
+}
+
+.usermenu_dropdown > button:hover {
+    background: rgb(255,208,103);
+    color: white;
+}

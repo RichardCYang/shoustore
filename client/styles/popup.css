@@ -4,6 +4,7 @@
     height: calc(100vh + 64px);
     width: 100vw;
     background: rgba(41, 41, 41, 0.722);
+    z-index: 24;
 }
 
 .popupWindow {
