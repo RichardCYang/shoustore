@@ -15,22 +15,6 @@ const port = 8090;
 conlog.coninfo('Initializing database...');
 
 dbmng.createTableNeeded();
-/* 카테고리 임시로 추가 (추후 관리자 페이지를 따로 만들어서 카테고리 추가/관리 예정) */
-dbmng.addCategory("Food");
-dbmng.addCategory("Electronics");
-dbmng.addCategory("Clothes");
-dbmng.addCategory("Cars");
-dbmng.addCategory("Pets");
-dbmng.addCategory("Sports");
-dbmng.addCategory("Outdoor");
-dbmng.addCategory("Furniture");
-dbmng.addCategory("Others");
-/* 상품 임시로 추가 */
-dbmng.addItem('Classic Radio','Electronics',85000,1,'img1.jpg','An Old Classical Radio');
-dbmng.addItem('Supermicro Server','Electronics',450000,1,'img3.jpg','Supermicro Server Computer');
-dbmng.addItem('Red Necktie','Clothes',12000,1,'img11.jpg','A Simple Red Necktie');
-dbmng.addItem('Office Chair','Furniture',125000,1,'img7.jpg','This is a chair whice usable in the office');
-dbmng.addItem('Fiction Books','Others',14200,2,'img6.jpg','This is a fiction books');
 
 conlog.confin("Initializing database");
 
