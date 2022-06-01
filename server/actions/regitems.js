@@ -8,7 +8,5 @@ exports.regitems = ( ws,data ) => {
             return;
         }
         ws.send( 'DONE_REGITEMS' );
-    }).catch((err) => {
-        console.log(err)
     })
 }

@@ -45,12 +45,12 @@ exports.createTableNeeded = () => {
     db.close(showErr);
 }
 
-exports.addCategory = ( category_name ) => {
+exports.addCategory = ( category_name ) => { // 카테고리 추가
     let db = new sqlite3.Database(shoustore_db,showErr);
     db.run('INSERT INTO shoustore_category VALUES ("' + category_name + '")',showErr);
 }
 
-exports.addItem = ( name,category_name,price,stockcnt,thumbnail,itemdesc ) => {
+exports.addItem = ( name,category_name,price,stockcnt,thumbnail,itemdesc ) => { // 상품 추가
     let db = new sqlite3.Database(shoustore_db,showErr);
     let column = 'name,category_name';
     let value = '"' + name + '","' + category_name + '"';
@@ -79,7 +79,7 @@ exports.addItem = ( name,category_name,price,stockcnt,thumbnail,itemdesc ) => {
     db.run(query,showErr);
 }
 
-exports.findCategories = async() => {
+exports.findCategories = async() => { 
     /* 카테고리 테이블 조회 */
     let query = 'SELECT category_name FROM shoustore_category';
     return await selectSync( query );
