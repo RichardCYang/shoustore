@@ -5,14 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="./icons/favicon.ico" type="image/x-icon" sizes="32x32">
     <link rel="stylesheet" href="./styles/fontloader.css">
-    <link rel="stylesheet" href="./styles/main.css"> 
     <link rel="stylesheet" href="./styles/sharedclass.css">
+    <link rel="stylesheet" href="./styles/mainview.css">
     <script src="./scripts/lib/sweetalert/sweetalert.min.js"></script>
     <script src="./scripts/meta.js"></script>
     <script src="./scripts/block_ie.js"></script>
     <script src="./scripts/websockcli.js"></script>
     <script src="./scripts/popup.js"></script> 
     <script src="./scripts/main.js"></script>
+    <script src="./scripts/mainview.js"></script> 
     <title>Share Houstore</title>
 </head>
 <body>
@@ -44,8 +45,28 @@
             </div>
         </div>
     </nav>-->
-    <main>
-        <embed id="mainContainer" src="./mainview.html">
+    <main style="background: white;">
+        <div class="mainarea">
+            <div class="mainbanner_container">
+                <div class="mainbanner_group">
+                </div>
+            </div>
+            <h3>최근 상품</h3>
+            <div class="itemcontainer">
+            </div>
+        </div>
+        <div id="maindownbanner">
+            <div class="unselectable">
+                <div>
+                    <img src="./icons/menuicon_chat.svg">
+                    <p>채팅</p>
+                </div>
+                <div>
+                    <img src="./icons/menuicon_additem.svg" onclick="onRegItem_clicked()">
+                    <p>상품 등록</p>
+                </div>
+            </div>
+        </div> 
     </main>
     <footer>
         <div>

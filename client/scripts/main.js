@@ -1,6 +1,6 @@
 
 window.updateSession = (data) => {
-    let menu        =   document.getElementById('userdiv'); 
+    /*let menu        =   document.getElementById('userdiv'); 
     let nameText    =   document.getElementById('username_text');
     let menus       =   menu.children;
     if( menus.length < 4 ){
@@ -18,11 +18,11 @@ window.updateSession = (data) => {
         menus[1].style.visibility = '';
         menus[2].style.display = 'none';
         menus[1].onclick = onSignUp_clicked;
-    }
+    }*/
 }
 
 window.startSessionTimer = (time) => {
-    this.curSessionTime = time * 60;
+    /*this.curSessionTime = time * 60;
     
     let timerDisplay = document.getElementById('sessiontimer_text'); 
     let min = 0;
@@ -37,27 +37,13 @@ window.startSessionTimer = (time) => {
 
         if( window.curSessionTime == 0 ){
             /* 로그아웃 */
-            signout();
+            //signout();
             /* 세션 타이머 종료 */
-            clearInterval(window.sessionTimer);
-        }
-    },1000);
+            //clearInterval(window.sessionTimer);
+        //}
+    //},1000);
 }
 
-function loadCategories(){
-    let catroot = document.getElementById('categories');
-    wsc_simplesend('ac=getcats',(event) => {
-        let cats = JSON.parse( event.data );
-        cats.forEach( row => {
-            let btn = document.createElementWithAttrib('button',{'class':'unselectable'});
-            btn.textContent = row.category_name + '';
-            btn.onclick = () => {
-                mainView.src = './boardview.html?ac=catlist&cat=' + row.category_name;
-            }
-            catroot.appendChild(btn);
-        });
-    });
-}
 
 window.onstorage = (event) => {
     if(!event.newValue){
@@ -92,7 +78,6 @@ window.onload = function(){
     }
     
     updateSession( sessionStorage );
-    loadCategories();
 }
 
 function signout(){
@@ -139,7 +124,7 @@ function onSignUp_clicked(){
 }
 
 function onGoHome_clicked(){
-    mainView.src = './mainview.html';
+    window.location.href = './index.html';
 }
 
 function onUserBox_hovered(){
@@ -154,7 +139,7 @@ function onSearchBox_entered( input ){
         return;
     }
     wsc_simplesend('ac=searchitem\n' + 'itemname=' + input,(event) => {
-        mainView.src = './boardview.html?ac=searchlist';
+        window.location.href = './boardview.html?ac=searchlist';
         localStorage.setItem('boardview_searchitems',event.data);
     });
 }

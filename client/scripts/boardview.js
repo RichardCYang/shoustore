@@ -13,16 +13,19 @@ function genCard( imgcode ){
     return card;
 }
 function pageToOpps(){
-    /* 기존 화면 전부 지움 */
-    document.clearBody();
     /* Opps 를 띄울 DIV 동적 생성 */
     let oopsDiv = document.createElementWithAttrib('div',{'class':'oopsimg'});
-    document.body.appendChild( oopsDiv );
+    document.querySelector('main').innerHTML = '';
+    document.querySelector('main').appendChild( oopsDiv );
 }
 function loadPage( input ){
     let data = JSON.parse( input );
     let frame = document.createElementWithAttrib('div',{'class':'mainarea'});
     let cards = document.createElementWithAttrib('div',{'class':'itemcontainer'});
+    if( !data ){
+        pageToOpps();
+        return;
+    }
     /* 아이템 개수 만큼 리스트 생성 */
     if( data.length > 0 ){
         /* 데이터 개수가 5개보다 적을 경우 그리드 첫 번째 줄을 채우지 못해 */
@@ -50,7 +53,8 @@ function loadPage( input ){
             }
         });
         frame.appendChild(cards);
-        document.body.appendChild(frame);
+        document.querySelector('main').innerHTML = '';
+        document.querySelector('main').appendChild( frame );
     }else{
         /* 에러 메세지( Opps ) 출력 */
         pageToOpps();
