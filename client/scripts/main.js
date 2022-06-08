@@ -66,8 +66,6 @@ if( !sessionStorage.length ){
 }
 
 window.onload = function(){
-    window.mainPopup = new Popup;
-    window.mainView = document.getElementById('mainContainer');
 
     if( sessionStorage.shoustore_key == 'EXP_KEY' ){
         sessionStorage.clear();
@@ -114,13 +112,11 @@ function onSignOut_clicked(){
 }
 
 function onSignIn_clicked(){
-    window.mainPopup.setUrl('./loginform.html');
-    window.mainPopup.makePopup();
+    window.location.href = './loginform.html';
 }
 
 function onSignUp_clicked(){
-    window.mainPopup.setUrl('./regform.html');
-    window.mainPopup.makePopup();
+    window.location.href = './regform.html';
 }
 
 function onGoHome_clicked(){
