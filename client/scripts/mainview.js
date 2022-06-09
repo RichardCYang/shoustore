@@ -42,6 +42,9 @@ function loadCategories(){
 
 function scrollBanner( scrollamount ){
     let banner = document.querySelector('.mainbanner_group');
+
+    if( !banner ) return;
+
     banner.style.left = (scrollamount * banner.clientWidth * -1) + 'px';
 }
 
@@ -79,7 +82,7 @@ function initBannerImgs(){
     }
 }
 
-window.onload = () => {
+function init_main(){
     loadCategories();
     /* 현재 메인에 표시되는 배너의 순서를 기억합니다 */
     window.curBannerIdx = 0;
@@ -92,6 +95,10 @@ window.onload = () => {
     initBannerImgs();
     /* 5초 간격으로 배너를 회전(Spin) 시키는 타이머(Timer) 실행 */
     startBannerScrollTimer(5);
+}
+
+window.onload = () => {
+    init_main();
 }
 
 function onRegItem_clicked(){

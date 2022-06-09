@@ -67,3 +67,18 @@ window.parseGetParams = (url) => {
 
     return tokenRegex;
 }
+
+window.loadPage = function( target,srcpath ){
+    var elem = document.querySelector( target );
+    /* Loading Page from the Server with AJAX */
+    var xhr = new XMLHttpRequest;
+    xhr.open('GET',srcpath,false);
+    xhr.send();
+
+    /* Parsing DOMTree from result data */
+    if( xhr.responseText ){
+        var domparser = new DOMParser;
+        var dom = domparser.parseFromString(xhr.responseText,'text/html');
+        elem.appendChild(dom.body.children[0]);
+    }    
+}
