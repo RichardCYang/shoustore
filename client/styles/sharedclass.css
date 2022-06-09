@@ -163,7 +163,7 @@ header {
 .searchdiv > input {
     width: calc(100% - 24px);
     border: none !important;
-    height: 0px !important;
+    height: 90% !important;
 }
 
 .searchdiv > button {

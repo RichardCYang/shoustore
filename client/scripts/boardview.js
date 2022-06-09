@@ -1,29 +1,17 @@
 
-function genCard( imgcode ){
-    let card;
-    let thumbnail;
-    card = document.createElementWithAttrib('div',{'class':'itemview'});
-    thumbnail = document.createElement('img');
-
-    if( imgcode ){
-        thumbnail.src = 'data:image/jpg;base64,' + imgcode;
-    }
-    
-    card.appendChild(thumbnail);
-    return card;
-}
-function pageToOpps(){
+BOARDVIEW = [];
+BOARDVIEW.pageToOpps = () => {
     /* Opps 를 띄울 DIV 동적 생성 */
     let oopsDiv = document.createElementWithAttrib('div',{'class':'oopsimg'});
     document.querySelector('main').innerHTML = '';
     document.querySelector('main').appendChild( oopsDiv );
 }
-function loadPage( input ){
+BOARDVIEW.loadContentPage = ( input ) => {
     let data = JSON.parse( input );
     let frame = document.createElementWithAttrib('div',{'class':'mainarea'});
     let cards = document.createElementWithAttrib('div',{'class':'itemcontainer'});
     if( !data ){
-        pageToOpps();
+        BOARDVIEW.pageToOpps();
         return;
     }
     /* 아이템 개수 만큼 리스트 생성 */
@@ -57,22 +45,23 @@ function loadPage( input ){
         document.querySelector('main').appendChild( frame );
     }else{
         /* 에러 메세지( Opps ) 출력 */
-        pageToOpps();
+        BOARDVIEW.pageToOpps();
     }
 }
-window.onload = () => {
-    let params = parseGetParams( window.location.href );
+
+BOARDVIEW.init = () => {
+    let params = parseGetParams( window.getParam );
     if( params ){
         if( params.ac === 'searchlist' ){
             let itemText = localStorage.getItem('boardview_searchitems');
             /* 페이지 생성 */
-            loadPage( itemText );
+            BOARDVIEW.loadContentPage( itemText );
             localStorage.removeItem('boardview_searchitems');
         }
         if( params.ac === 'catlist' ){
             wsc_simplesend('ac=getcatitems\ncat=' + params.cat,(event) => {
                 /* 페이지 생성 */
-                loadPage( event.data );
+                BOARDVIEW.loadContentPage( event.data );
             });
         }
     }

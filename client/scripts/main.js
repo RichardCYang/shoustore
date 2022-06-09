@@ -95,24 +95,3 @@ function signout(){
         }
     });
 }
-
-function onSignOut_clicked(){
-    signout();
-}
-
-function onUserBox_hovered(){
-    let userbox =  document.getElementsByClassName('userbox');
-    for(let i = 0; i < userbox.length; i++){
-        userbox[i].style.display = 'block';
-    }
-}
-
-function onSearchBox_entered( input ){
-    if( checkNullOrEmpty( input ) ){
-        return;
-    }
-    wsc_simplesend('ac=searchitem\n' + 'itemname=' + input,(event) => {
-        window.location.href = './boardview.html?ac=searchlist';
-        localStorage.setItem('boardview_searchitems',event.data);
-    });
-}

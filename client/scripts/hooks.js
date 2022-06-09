@@ -16,6 +16,24 @@ function toggleHeaderUserMenu( isShown ){
     menu.style.display = isShown ? 'block' : 'none';
 }
 
+function hook_entered( data,input ){
+    if( data == 'HOOK_ENTERED_SEARCHBOX' ){
+        if( checkNullOrEmpty( input ) ){
+            return;
+        }
+        wsc_simplesend('ac=searchitem\n' + 'itemname=' + input,(event) => {
+            clearContent();
+            window.getParam = './boardview.html?ac=searchlist';
+            window.loadPage('body','./frags/board.frg');
+            window.loadPage('body','./frags/footer.frg');
+            if( BOARDVIEW ){
+                BOARDVIEW.init();
+            }
+            localStorage.setItem('boardview_searchitems',event.data);
+        });
+    }
+}
+
 function hook_clicked( data ){
     if( data == 'HOOK_CLICKED_SIGNIN' ){
         clearContent();
@@ -47,6 +65,21 @@ function hook_clicked( data ){
     if( data == 'HOOK_CLICKED_USERMENU' ){
         this.isShown = !this.isShown;
         toggleHeaderUserMenu( this.isShown );
+        return;
+    }
+
+    if( data == 'HOOK_CLICKED_REGISTER' ){
+        let nickname = document.querySelector('.nicknameInput');
+        let passwd = document.querySelector('.passwdInput');
+        let confirmpw = document.querySelector('.confirmPasswdInput');
+        let phoneno = document.querySelector('.phoneNoInput');
+
+        if( !nickname ) return;
+        if( !passwd ) return;
+        if( !confirmpw ) return;
+        if( !phoneno ) return;
+
+        window.register( nickname.value, passwd.value, confirmpw.value, phoneno.value );
         return;
     }
 }

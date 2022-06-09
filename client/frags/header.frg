@@ -2,7 +2,7 @@
     <div class="header_wrapper">
         <h1 class="unselectable clickable" onclick="hook_clicked('HOOK_CLICKED_GOHOME')">Share Houstore</h1>
         <div class="searchdiv">
-            <input type="text" onkeydown="if( arguments[0].keyCode === 13 ){ onSearchBox_entered( this.value ); this.value = ''; }"/>
+            <input type="text" onkeydown="if( arguments[0].keyCode === 13 ){ hook_entered('HOOK_ENTERED_SEARCHBOX',this.value); this.value = ''; }"/>
             <button></button>
         </div>
         <button class="usermenu clickable" onclick="hook_clicked('HOOK_CLICKED_USERMENU')"></button>
