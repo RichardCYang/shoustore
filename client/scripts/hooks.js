@@ -62,9 +62,27 @@ function hook_clicked( data ){
         return;
     }
 
+    if( data == 'HOOK_CLICKED_GOTOREG' ){
+        clearContent();
+        window.loadPage('body','./frags/register.frg');
+        window.loadPage('body','./frags/footer.frg');
+        return;
+    }
+
     if( data == 'HOOK_CLICKED_USERMENU' ){
         this.isShown = !this.isShown;
         toggleHeaderUserMenu( this.isShown );
+        return;
+    }
+
+    if( data == 'HOOK_CLICKED_LOGIN' ){
+        let nickname = document.querySelector('.nicknameInput');
+        let passwd = document.querySelector('.passwdInput');
+
+        if( !nickname ) return;
+        if( !passwd ) return;
+
+        window.login( nickname.value, passwd.value );
         return;
     }
 

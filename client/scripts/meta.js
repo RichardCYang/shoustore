@@ -98,6 +98,52 @@ window.loadPage = function( target,srcpath ){
 }
 
 /* 주요 기능 함수들 */
+window.login = ( nickname,passwd ) => {
+    if( checkNullOrEmpty( nickname ) ){
+        showMessageBox( '잘못된 입력','아이디(닉네임)은 필수 입력사항 입니다!','error' );
+        return;
+    }
+    if( checkNullOrEmpty( passwd ) ){
+        showMessageBox( '잘못된 입력','비밀번호는 필수 입력사항 입니다!','error' );
+        return;
+    }
+    if( nickname.search(/[!=<>?+-]/g) > -1 ){
+        showMessageBox( '보안 경고','아이디에 적절하지 않은 특수문자가 포함되었습니다!','warning' );
+        return;
+    }
+    if( nickname.search(/\b(union|select|from|where|or|and|null|is)\b/gi) > -1 ){
+        showMessageBox( '보안 경고','아이디에 적절하지 않은 키워드가 포함되었습니다!','warning' );
+        return;
+    }
+
+    wsc_simplesend('ac=signin\n' + 'id=' + nickname + '\n' + 'pw=' + sha256(passwd),(event) => {
+        if( event.data === 'ERR_NOMEMBER' ){
+            showMessageBox( '등록되지 않은 사용자','등록된 사용자가 아닙니다!','info' );
+            return;
+        }
+        if( event.data === 'ERR_MISMATCHPASSWD' ){
+            showMessageBox( '비밀번호 오류','비밀번호가 일치하지 않습니다!','error');
+            return;
+        }
+        /* 로그인이 성공하였을 때, 새로 발급된 세션 값을 받아옴 */
+        if( event.data.indexOf("session?") > -1 ){
+            /* 로그인 성공 시, 성공 메세지 띄우기 */
+            showMessageBox( '로그인 알림','로그인 성공!','info' );
+            /* 세션 정보를 얻어왔을 때 */
+            /* 세션 값에서 만료시간과 고윳값을 파싱 */
+            let parseData = event.data.split("?")[1];
+            parseData = parseData.split("&");
+            
+            let id = parseData[0].split(/id=(.*?)/g)[2];
+            let expired = parseData[1].split(/expired=(.*?)/g)[2];
+            let username = parseData[2].split(/username=(.*?)/g)[2];
+
+            sessionStorage.setItem('shoustore_key',id);
+            sessionStorage.setItem('shoustore_expired',expired);
+            sessionStorage.setItem('shoustore_username',username);
+        }
+    });
+}
 window.register = ( nickname,passwd,confirmpasswd,phoneno ) => {
     if( checkNullOrEmpty( nickname) ){
         showMessageBox( '잘못된 입력','아이디(닉네임)은 필수 입력사항 입니다!','error' );
