@@ -2,22 +2,11 @@
 .regItemForm {
     position: absolute;
     width: 640px;
-    height: 480px;
-    left: calc(50% - 320px);
-    top: 0px;
-}
-
-.regItemForm button {
-    height: 30px;
-    border-radius: 5px;
-    /* 로그인 버튼에 미묘한( subtile ) 외부 그림자 효과 적용 */
-    box-shadow:2px 2px 4px #d4d4d4;
-}
-
-.regItemForm button:hover {
-    background: rgb(255, 187, 39);
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
 }
 
 #itemdescView {
-    height: 240px;
+    height: 140px;
 }

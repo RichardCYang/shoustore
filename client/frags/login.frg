@@ -9,8 +9,8 @@
             <input class="passwdInput" type="password"/><br/> 
         </div>
         <div class="linearHorizon">
-            <button class="shoustore_default_btn horizonButton" id="loginButton" onclick="hook_clicked('HOOK_CLICKED_LOGIN')">로그인</button>
-            <button class="shoustore_default_btn horizonButton" id="regButton" onclick="hook_clicked('HOOK_CLICKED_GOTOREG')">회원가입</button>
+            <button class="shoustore_default_btn horizonButton formbutton" onclick="hook_clicked('HOOK_CLICKED_LOGIN')">로그인</button>
+            <button class="shoustore_default_btn horizonButton formbutton" onclick="hook_clicked('HOOK_CLICKED_GOTOREG')">회원가입</button>
         </div>
     </div>
 </main>

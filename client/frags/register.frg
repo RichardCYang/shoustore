@@ -16,6 +16,6 @@
             <label>전화번호 <label class="koreantag">('-' 제외)</label></label> 
             <input class="phoneNoInput" type="tel"/><br/> 
         </div>
-        <button class="shoustore_default_btn" id="regButton" onclick="hook_clicked('HOOK_CLICKED_REGISTER')">회원가입</button>
+        <button class="shoustore_default_btn formbutton" onclick="hook_clicked('HOOK_CLICKED_REGISTER')">회원가입</button>
     </div>
 </main>

@@ -86,10 +86,3 @@ function init_main(){
 window.onload = () => {
     init_main();
 }
-
-function onRegItem_clicked(){
-    if( !sessionStorage.shoustore_key ){
-        showMessageBox('로그인 안내','로그인이 필요한 서비스 입니다!','info');
-        return;
-    }
-}

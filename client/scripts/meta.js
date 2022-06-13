@@ -7,11 +7,6 @@ document.addStyleSheet = ( link ) => {
     document.head.appendChild( linkTag );
 }
 
-document.setOnClickByID = ( id,callback ) => {
-    let element = document.getElementById( id );
-    element.onclick = callback;
-}
-
 document.createElementWithAttrib = ( elementName,atts ) => {
     let keys = Object.keys( atts );
     let keyCnt = keys.length;
@@ -98,6 +93,37 @@ window.loadPage = function( target,srcpath ){
 }
 
 /* 주요 기능 함수들 */
+window.registerItem = ( name,price,stockcnt,catname,itemdesc,thumbnail ) => {
+    if( checkNullOrEmpty( namee ) ){
+        showMessageBox( '잘못된 입력','상품명을 입력해주세요!','error' )
+        return;
+    }
+    if( checkNullOrEmpty( price ) ){
+        showMessageBox( '잘못된 입력','가격을 입력해주세요!','error' )
+        return;
+    }
+    if( checkNullOrEmpty( stockcnt ) ){
+        showMessageBox( '잘못된 입력','재고를 입력해주세요!','error' )
+        return;
+    }
+    if( checkNullOrEmpty( catname ) ){
+        showMessageBox( '잘못된 입력','카테고리를 입력해주세요!','error' )
+        return;
+    }
+
+    wsc_simplesend('ac=regitems\n' + 'name=' + name + '\n' +
+                                        'category_name=' + catname + '\n' +
+                                        'price=' + price + '\n' +
+                                        'stockcnt=' + stockcnt + '\n' +
+                                        'itemdesc=' + itemdesc + '\n' +
+                                        'thumbnail=' + thumbnail,(event) =>{
+    
+        if( event.data == "DONE_REGITEMS" ) {
+            showMessageBox( '상품등록 성공','상품등록에 성공하였습니다!','info' );
+        } 
+                    
+    }) 
+}
 window.login = ( nickname,passwd ) => {
     if( checkNullOrEmpty( nickname ) ){
         showMessageBox( '잘못된 입력','아이디(닉네임)은 필수 입력사항 입니다!','error' );

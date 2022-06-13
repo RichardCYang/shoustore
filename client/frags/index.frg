@@ -15,7 +15,7 @@
                 <p>채팅</p>
             </div>
             <div>
-                <img src="./icons/menuicon_additem.svg" onclick="onRegItem_clicked()">
+                <img src="./icons/menuicon_additem.svg" onclick="hook_clicked('HOOK_CLICKED_GOTOREGITEM')">
                 <p>상품 등록</p>
             </div>
         </div>

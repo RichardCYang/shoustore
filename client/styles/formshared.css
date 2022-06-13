@@ -1,16 +1,4 @@
 
-select {
-    -o-appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    padding: 1px;
-    /* 콤보박스의 Padding + Border 크키를 내용에 맞추기 위함 */
-    /* 이것을 하지 않으면 상단의 텍스트 입력창보다 더 높이가 작게 나옴 */
-    /* 크기 기준점이 달라지기 때문 */
-    box-sizing: content-box;
-}
-
 .signinForm {
     position: absolute;
     width: 400px;
@@ -23,7 +11,11 @@ select {
     transform: translate(-50%,-50%) scale(1.2);
 }
 
-.signinForm button:not(.horizonButton){
+.button_width_fit {
+    width: 100% !important;
+}
+
+.formbutton:not(.horizonButton){
     position: relative;
     width: 85%;
     height: 30px;
@@ -41,8 +33,8 @@ select {
     flex-shrink: 1;
 }
 
-.signinForm button:hover {
-    background: rgb(255, 187, 39);
+.formbutton:hover {
+    background: rgb(255, 187, 39) !important;
 }
 
 .inputField {
@@ -60,7 +52,7 @@ select {
     color: #707070;
 }
 
-.inputField > input {
+.inputField > input,textarea {
     display: block;
     position: relative;
     width: 100%;
@@ -69,7 +61,19 @@ select {
     height: 20px;
 }
 
-input[type=text],input[type=password],input[type=tel] {
+.inputField > input[type=file] {
+    height: 40px;
+}
+
+textarea {
+    resize: none;
+}
+
+textarea:focus {
+    outline: none;
+}
+
+input[type=text],input[type=password],input[type=tel],input[type=number] {
     background: white;
     height: 28px;
     border: none;

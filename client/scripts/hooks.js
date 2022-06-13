@@ -69,6 +69,20 @@ function hook_clicked( data ){
         return;
     }
 
+    if( data == 'HOOK_CLICKED_GOTOREGITEM' ){
+        if( !sessionStorage.shoustore_key ){
+            showMessageBox('로그인 안내','로그인이 필요한 서비스 입니다!','info');
+            return;
+        }
+        clearContent();
+        window.loadPage('body','./frags/regitem.frg');
+        window.loadPage('body','./frags/footer.frg');
+        if( REGITEMVIEW ){
+            REGITEMVIEW.init();
+        }
+        return;
+    }
+
     if( data == 'HOOK_CLICKED_USERMENU' ){
         this.isShown = !this.isShown;
         toggleHeaderUserMenu( this.isShown );
