@@ -62,7 +62,7 @@
 }
 
 .inputField > input[type=file] {
-    height: 40px;
+    height: 24px;
 }
 
 textarea {

@@ -20,9 +20,12 @@
             <label>상품 설명</label> 
             <textarea id="itemdescView"></textarea><br/> 
         </div>
-        <div class="inputField">
+        <div class="inputField thumbnailInput">
             <label>미리보기 이미지</label>
-            <input id="thumbnailFile" type="file"/><br/> 
+            <input type="file" accept=".jpg,.jpeg,.png,.gif" onchange="hook_changed('HOOK_CHANGED_THUMBUPLOAD',this)"/><br/> 
+            <div class="thumbnailWrapper">
+                <img class="thumbnailView">
+            </div>
         </div>
         <div class="inputField">
             <button class="shoustore_default_btn formbutton button_width_fit">등록</button>

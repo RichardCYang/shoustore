@@ -34,6 +34,24 @@ function hook_entered( data,input ){
     }
 }
 
+function hook_changed( data,target ){
+    if( data == 'HOOK_CHANGED_THUMBUPLOAD' ){
+        if( target ){
+            let files = target.files;
+            if( FileReader && files ){
+                let imgreader = new FileReader;
+                imgreader.onload = () => {
+                    let thumbView = document.querySelector('.thumbnailView');
+                    if( thumbView ){
+                        thumbView.src = imgreader.result;
+                    }
+                }
+                imgreader.readAsDataURL(files[0]);
+            }
+        }
+    }
+}
+
 function hook_clicked( data ){
     if( data == 'HOOK_CLICKED_SIGNIN' ){
         clearContent();
