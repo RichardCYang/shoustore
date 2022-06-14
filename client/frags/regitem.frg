@@ -22,13 +22,13 @@
         </div>
         <div class="inputField thumbnailInput">
             <label>미리보기 이미지</label>
-            <input type="file" accept=".jpg,.jpeg,.png,.gif" onchange="hook_changed('HOOK_CHANGED_THUMBUPLOAD',this)"/><br/> 
+            <input type="file" accept=".jpg,.jpeg,.png,.gif" id="thumbnailFile" onchange="hook_changed('HOOK_CHANGED_THUMBUPLOAD',this)"/><br/> 
             <div class="thumbnailWrapper">
                 <img class="thumbnailView">
             </div>
         </div>
         <div class="inputField">
-            <button class="shoustore_default_btn formbutton button_width_fit">등록</button>
+            <button class="shoustore_default_btn formbutton button_width_fit" onClick='regitem'>등록</button>
         </div>
     </div>
 </main>
