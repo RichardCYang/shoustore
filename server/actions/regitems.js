@@ -1,9 +1,11 @@
 
 const dbmng = require('../dbmanager');
+const sessionmng = require('../sessionmanager');
 
 exports.regitems = ( ws,data ) => {
-    console.log("regitems.js -> db.js additem")
-    dbmng.addItem( data.name, data.category_name, data.price, data.stockcnt, data.thumbnail, data.itemdesc,(err) => {
+    let sessionInfo = sessionmng.getSession( data.session );
+    let username = sessionInfo != null ? sessionInfo.username : 'unknown';
+    dbmng.addItem( data.name, data.category_name, data.price, data.stockcnt, "./users/" + username + "/" + data.thumbnailFile, data.itemdesc,(err) => {
         if ( err ) {
             console.log( err );
             return;

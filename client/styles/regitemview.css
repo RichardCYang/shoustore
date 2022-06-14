@@ -31,6 +31,6 @@ main{
     top: -4px;
 }
 
-#itemdescView {
+.itemdescView {
     height: 140px;
 }

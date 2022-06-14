@@ -118,6 +118,28 @@ function hook_clicked( data ){
         return;
     }
 
+    if( data == 'HOOK_CLICKED_REGITEM' ){
+        let name = document.querySelector('.nicknameInput');
+        let price = document.querySelector('.priceInput');
+        let stockcnt = document.querySelector('.countInput');
+        let category_name = document.querySelector('.catsInput');
+        let itemdesc = document.querySelector('.itemdescView');
+        let thumbnail = document.querySelector('.thumbnailView');
+        let thumbnailFile = document.querySelector('.thumbnailFile');
+
+        if( !name ) return;
+        if( !price ) return;
+        if( !stockcnt ) return;
+        if( !category_name ) return;
+        if( !itemdesc ) return;
+        if( !thumbnail ) return;
+        if( !thumbnailFile ) return;
+        if( !thumbnailFile.files ) return;
+
+        window.registerItem( name.value, price.value, stockcnt.value, category_name.value, itemdesc.value, thumbnail.src, thumbnailFile.files[0].name );
+        return;
+    }
+
     if( data == 'HOOK_CLICKED_REGISTER' ){
         let nickname = document.querySelector('.nicknameInput');
         let passwd = document.querySelector('.passwdInput');

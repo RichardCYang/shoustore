@@ -50,7 +50,7 @@ exports.addCategory = ( category_name ) => { // 카테고리 추가
     db.run('INSERT INTO shoustore_category VALUES ("' + category_name + '")',showErr);
 }
 
-exports.addItem = ( name,category_name,price,stockcnt,thumbnail,itemdesc ) => { // 상품 추가
+exports.addItem = ( name,category_name,price,stockcnt,thumbnail,itemdesc,callback ) => { // 상품 추가
     let db = new sqlite3.Database(shoustore_db,showErr);
     let column = 'name,category_name';
     let value = '"' + name + '","' + category_name + '"';
@@ -75,8 +75,10 @@ exports.addItem = ( name,category_name,price,stockcnt,thumbnail,itemdesc ) => { 
         value = value + ',"' + itemdesc + '"';
     }
 
+    let cb = callback ? callback : showErr;
+
     let query = 'INSERT INTO shoustore_item (' + column + ') VALUES(' + value + ')';
-    db.run(query,showErr);
+    db.run(query,cb);
 }
 
 exports.findCategories = async() => { 
@@ -132,10 +134,7 @@ exports.regMember = ( nickname, password, phoneNo,callback) => {
     let db = new sqlite3.Database(shoustore_db,showErr);
     let today = Date.now();
 
-    let cb = showErr;
-    if( callback ){
-        cb = callback;
-    }
+    let cb = callback ? callback : showErr;
 
     db.run('INSERT INTO shoustore_member (nickname, password, phone, regdate) VALUES ("' + nickname + '","' + password + '","' + phoneNo + '",' + today + ')',cb);
 }

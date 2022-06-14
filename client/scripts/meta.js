@@ -93,8 +93,8 @@ window.loadPage = function( target,srcpath ){
 }
 
 /* 주요 기능 함수들 */
-window.registerItem = ( name,price,stockcnt,catname,itemdesc,thumbnail ) => {
-    if( checkNullOrEmpty( namee ) ){
+window.registerItem = ( name,price,stockcnt,catname,itemdesc,thumbnailSrc,thumbnailFile ) => {
+    if( checkNullOrEmpty( name ) ){
         showMessageBox( '잘못된 입력','상품명을 입력해주세요!','error' )
         return;
     }
@@ -111,18 +111,22 @@ window.registerItem = ( name,price,stockcnt,catname,itemdesc,thumbnail ) => {
         return;
     }
 
+    let session_key = sessionStorage.shoustore_key ? sessionStorage.shoustore_key : '-1';
+
     wsc_simplesend('ac=regitems\n' + 'name=' + name + '\n' +
                                         'category_name=' + catname + '\n' +
                                         'price=' + price + '\n' +
                                         'stockcnt=' + stockcnt + '\n' +
                                         'itemdesc=' + itemdesc + '\n' +
-                                        'thumbnail=' + thumbnail,(event) =>{
-    
+                                        'thumbnailFile=' + thumbnailFile + '\n' +
+                                        'session=' + session_key + '\n' +
+                                        'thumbnailSrc=' + thumbnailSrc,(event) =>{
+                                            
         if( event.data == "DONE_REGITEMS" ) {
             showMessageBox( '상품등록 성공','상품등록에 성공하였습니다!','info' );
         } 
-                    
-    }) 
+
+    });
 }
 window.login = ( nickname,passwd ) => {
     if( checkNullOrEmpty( nickname ) ){
@@ -240,5 +244,5 @@ window.register = ( nickname,passwd,confirmpasswd,phoneno ) => {
             showMessageBox( '회원가입 성공','회원가입이 성공적으로 완료되었습니다!','info' );
             return;
         }
-    })
+    });
 }
